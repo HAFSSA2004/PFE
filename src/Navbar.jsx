@@ -1,11 +1,12 @@
 import React from 'react';
 import './Nav.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded">
       <div className="container-fluid">
-        <a className="navbar-brand fw-bold" href="#">RecrutPro</a>
+        <Link className="navbar-brand fw-bold" to="/">RecrutPro</Link>
 
         {/* Bouton Toggle pour le menu mobile */}
         <button
@@ -23,16 +24,16 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="#">Home</a>
+              <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">About Us</a>
+              <Link className="nav-link" to="/about">About Us</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Contact</a>
+              <Link className="nav-link" to="/contact">Contact</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Jobs</a>
+              <Link className="nav-link" to="/jobs">Jobs</Link>
             </li>
           </ul>
 
@@ -40,9 +41,14 @@ const Navbar = () => {
             <button className="btn btn-primary btnS me-2">Sign In</button>
             <button className="btn btn-outline-primary me-3">Register</button>
             <div className="vr"></div>
-            <a href="#" className="ms-3  text-decoration-none text-muted">
+            <button
+              className="ms-3 btn btn-link text-decoration-none text-muted"
+              onClick={() => alert("Feature coming soon!")}
+              role="button"
+              tabIndex="0"
+            >
               Entreprises/Publier Une Offre D'Emploi
-            </a>
+            </button>
           </div>
         </div>
       </div>
