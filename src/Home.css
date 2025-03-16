@@ -2,12 +2,20 @@
 .custom-container {
   width: 90%;
   max-width: 2600px;
-  margin: 50px auto; /* Centre horizontalement et ajoute un espace en haut */
   text-align: center;
-}
 
+}
+.back{
+  background-image: url('image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Pleine hauteur */
+
+}
 /* Titre principal */
 .title {
+  padding-top: 35px;
   font-size: 2.5rem;
   font-weight: bold;
   color: #007bff; /* Bleu */

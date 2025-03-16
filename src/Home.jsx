@@ -3,7 +3,8 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div className="custom-container">
+   <div className="back">
+     <div className="custom-container">
       <h2 className="title">
         Trouvez Votre Emploi Idéal ou Recrutez les Meilleurs Talents
       </h2>
@@ -22,6 +23,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 
