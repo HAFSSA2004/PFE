@@ -37,8 +37,8 @@ const Navbar = () => {
           </ul>
 
           <div className="d-flex align-items-center">
-            <button className="btn btn-primary btnS me-2">Sign In</button>
-            <button className="btn btn-outline-primary me-3">Register</button>
+            <button className="btn btn-primary btnS me-2"><Link style={{textDecoration:'none'}} to='/Login'>Sign In</Link></button>
+            <button className="btn btn-outline-primary me-3"><Link style={{textDecoration:'none'}} to='/Signup'>Register</Link></button>
             <div className="vr"></div>
             <Link to="/post-job" className="ms-3 text-decoration-none text-muted">
               Entreprises/Publier Une Offre D'Emploi

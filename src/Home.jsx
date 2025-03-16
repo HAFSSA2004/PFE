@@ -5,7 +5,7 @@ const Home = () => {
   return (
    <div className="back">
      <div className="custom-container">
-      <h2 className="title">
+     <h2 className="title text-center">
         Trouvez Votre Emploi Idéal ou Recrutez les Meilleurs Talents
       </h2>
       <p className="subtitle">
