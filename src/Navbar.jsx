@@ -1,6 +1,6 @@
 import React from 'react';
-import './Nav.css';
 import { Link } from 'react-router-dom';
+import './Nav.css';
 
 const Navbar = () => {
   return (
@@ -8,7 +8,6 @@ const Navbar = () => {
       <div className="container-fluid">
         <Link className="navbar-brand fw-bold" to="/">RecrutPro</Link>
 
-        {/* Bouton Toggle pour le menu mobile */}
         <button
           className="navbar-toggler"
           type="button"
@@ -41,14 +40,9 @@ const Navbar = () => {
             <button className="btn btn-primary btnS me-2">Sign In</button>
             <button className="btn btn-outline-primary me-3">Register</button>
             <div className="vr"></div>
-            <button
-              className="ms-3 btn btn-link text-decoration-none text-muted"
-              onClick={() => alert("Feature coming soon!")}
-              role="button"
-              tabIndex="0"
-            >
+            <Link to="/post-job" className="ms-3 text-decoration-none text-muted">
               Entreprises/Publier Une Offre D'Emploi
-            </button>
+            </Link>
           </div>
         </div>
       </div>
