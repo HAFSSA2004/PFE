@@ -63,7 +63,10 @@ function Login() {
           <div className="position-absolute top-50 start-50 translate-middle text-white text-center" style={{ width: "80%" }}>
             <h2>Vous n'avez pas encore de compte ?</h2>
             <p>Créez dès maintenant votre compte en quelques minutes</p>
-            <button className="" style={{backgroundColor:'#0078BB',border:'none',borderRadius:'15px',padding:'8px'}}><a href="/SignUp" style={{color:'white',textDecoration:'none',}}>S’inscrire ou activer mon compte</a></button>
+            <button className="" style={{backgroundColor:'#0078BB',border:'none',borderRadius:'15px',padding:'8px'}}>
+                <Link to='/SignUp' style={{color:'white',textDecoration:'none'}}>S’inscrire ou activer mon compte</Link>
+                
+                </button>
           </div>
         </div>
         
