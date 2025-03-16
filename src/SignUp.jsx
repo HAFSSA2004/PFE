@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import "@fontsource/inter"; // Defaults to 400 (normal)
+
 
 function Signup() {
   const [name, setName] = useState("");
@@ -86,7 +86,7 @@ function Signup() {
     
         {/* Right side - Image */}
         <div className="col-md-6 d-none d-md-block h-100">
-          <img src="Login.jpg" alt="Sign Up" className="img-fluid w-100 h-100 rounded" style={{ objectFit: "cover" }} />
+          <img src="login.jpg" alt="Sign Up" className="img-fluid w-100 h-100 rounded" style={{ objectFit: "cover" }} />
         </div>
       </div>
     </div>
