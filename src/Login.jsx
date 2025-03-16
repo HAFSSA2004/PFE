@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@fontsource/inter"; // Defaults to 400 (normal)
+//import "@fontsource/inter"; // Defaults to 400 (normal)
 
 function Login() {
   const [email, setEmail] = useState("");
