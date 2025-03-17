@@ -5,8 +5,9 @@ import About from './About';
 import Contact from './Contact';
 import Signup from './SignUp';
 import Login from './Login';
-import OffreDetail from "./OffreDetail";
-import { Routes, Route } from 'react-router-dom'; // ✅ Import correct
+import Footer from './Footer';
+import OffreDetail from './OffreDetail';
+import {  Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/offre/:id" element={<OffreDetail />} />
       </Routes>
+      <Footer/>
     </div>
+   
   );
 }
 
