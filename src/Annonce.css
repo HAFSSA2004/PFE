@@ -25,31 +25,26 @@
 
 .job-content {
     background: #eef3ff;
-    padding: 15px;
     border-radius: 10px;
     height: 170px;
-    margin: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px; /* Ajout d'un padding pour uniformiser l'intérieur */
 }
 
 .text-content {
     text-align: left;
-    padding-top: 10px;
+    flex-grow: 1;
 }
-
-.job-content h2 {
-    font-size: 18px;
-    margin: 0;
-    
-}
-
+ 
 .job-content p {
-    font-size: 16px;
-    
-    color: #333;
-    margin: 5px 0 0;
+    margin: 5px 0; /* Même marge pour uniformiser */
+    padding: 0; /* Supprimer tout padding   */
+}
+h4{
+    padding-top: 15px;
+    color: #002d62 !important;
 }
 
 .company-logo {

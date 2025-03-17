@@ -20,8 +20,9 @@ function Annonce() {
                     <div className="job-content">
                         <div className="text-content">
                             <span className="date">{new Date(offre.date_publication).toLocaleDateString()}</span>
-                            <h2>{offre.entreprise}</h2>
+                            <h4>{offre.entreprise}</h4>
                             <p>{offre.titre}</p>
+                         
                         </div>
                         <img src="logo.png" alt="Logo" className="company-logo" />
                     </div>
