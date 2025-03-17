@@ -14,7 +14,7 @@ function Annonce() {
     }, []);
 
     return (
-        <div>
+        <div className="cont">
             {offres.map((offre) => (
                 <div key={offre._id} className="job-card">
                     <div className="job-content">
