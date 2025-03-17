@@ -7,34 +7,30 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-section">
           <h3>RecrutPro</h3>
-          <ul>
-            <li>Emploi Idéal</li>
-            <li>Recruter des Talents</li>
-            <li>Plateforme Pro</li>
-          </ul>
+          <p>Votre solution pour l'emploi et le recrutement.</p>
         </div>
         <div className="footer-section">
           <h3>For Job Seekers</h3>
           <ul>
-            <li><a href="#">Browse Jobs</a></li>
-            <li><a href="#">Upload CV</a></li>
-            <li><a href="#">Career Advice</a></li>
+            <li><a href="/">Browse Jobs</a></li>
+            <li><a href="/">Upload CV</a></li>
+            <li><a href="/">Career Advice</a></li>
           </ul>
         </div>
         <div className="footer-section">
           <h3>For Recruiters</h3>
           <ul>
-            <li><a href="#">Post a Job</a></li>
-            <li><a href="#">Candidate Search</a></li>
-            <li><a href="#">Recruitment Solutions</a></li>
+            <li><a href="/">Post a Job</a></li>
+            <li><a href="/">Candidate Search</a></li>
+            <li><a href="/">Recruitment Solutions</a></li>
           </ul>
         </div>
         <div className="footer-section">
           <h3>Support & Resources</h3>
           <ul>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Help Center</a></li>
+            <li><a href="/">FAQ</a></li>
+            <li><a href="/">Contact</a></li>
+            <li><a href="/">Help Center</a></li>
           </ul>
         </div>
       </div>
@@ -42,7 +38,7 @@ export default function Footer() {
         <div className="subscribe-section">
           <input
             type="email"
-            placeholder="Entrer your Email"
+            placeholder="Entrez votre email"
             className="email-input"
           />
           <button className="subscribe-button">
@@ -50,9 +46,9 @@ export default function Footer() {
           </button>
         </div>
         <div className="social-icons">
-          <a href="#"><FaFacebookF /></a>
-          <a href="#"><FaLinkedinIn /></a>
-          <a href="#"><FaTwitter /></a>
+          <a href="/" aria-label="Facebook"><FaFacebookF /></a>
+          <a href="/" aria-label="LinkedIn"><FaLinkedinIn /></a>
+          <a href="/" aria-label="Twitter"><FaTwitter /></a>
         </div>
       </div>
     </footer>
