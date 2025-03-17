@@ -5,6 +5,7 @@ import About from './About'; // Exemple d'autres pages
 import Contact from './Contact';
 import Signup from './SignUp';
 import Login from './Login';
+import Footer from './Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           {/* Ajoute d'autres routes ici */}
         </Routes>
       </Router>
+      <Footer />
     </div>
   );
 }
