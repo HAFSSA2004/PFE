@@ -1,6 +1,6 @@
 import React from "react";
 import './Home.css';
-
+import Annonce from './Annoce';
 const Home = () => {
   return (
    <div className="back">
@@ -23,6 +23,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    <Annonce/>
    </div>
   );
 };

@@ -1,0 +1,85 @@
+.date{
+    background-color: white;
+    padding: 8px;
+    border-radius: 30px;
+}
+
+.job-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    padding: 15px;
+    text-align: center;
+}
+
+.job-header {
+    text-align: left;
+    font-size: 12px;
+    color: #555;
+    background: #eef3ff;
+    padding: 5px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.job-content {
+    background: #eef3ff;
+    padding: 15px;
+    border-radius: 10px;
+    height: 170px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-content {
+    text-align: left;
+    padding-top: 10px;
+}
+
+.job-content h2 {
+    font-size: 18px;
+    margin: 0;
+    
+}
+
+.job-content p {
+    font-size: 16px;
+    
+    color: #333;
+    margin: 5px 0 0;
+}
+
+.company-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.job-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.location {
+    font-size: 14px;
+    color: gray;
+}
+
+.details-btn {
+    background-color: #002d62;
+    color: white;
+    border: none;
+    width: 80px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.details-btn:hover {
+    background-color: #001a3d;
+}
