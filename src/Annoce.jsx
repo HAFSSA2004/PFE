@@ -12,7 +12,7 @@ function Annonce() {
             .then(response => setOffres(response.data))
             .catch(error => console.error("Erreur lors de la récupération des offres :", error));
     }, []);
-
+    
     return (
         <div className="cont">
             {offres.map((offre) => (

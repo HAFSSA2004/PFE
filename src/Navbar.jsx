@@ -34,6 +34,9 @@ const Navbar = () => {
         <li className="nav-item">
           <Link className="nav-link" to="/jobs">Jobs</Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/Dashboard">Dashbord</Link>
+        </li>
       </ul>
 
       <div className="d-flex align-items-center flex-nowrap">

@@ -6,8 +6,11 @@ import Contact from './Contact';
 import Signup from './SignUp';
 import Login from './Login';
 import Footer from './Footer';
+import Dashboard from "./Dashboard";
+import ManageCandidatures from './ManageCandidatures.js';
 import OffreDetail from './OffreDetail';
 import {  Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -20,7 +23,10 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/offre/:id" element={<OffreDetail />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/manage-candidatures" element={<ManageCandidatures />} />
       </Routes>
+      
       <Footer/>
     </div>
    

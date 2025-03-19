@@ -1,25 +1,55 @@
 import React, { useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
-
-//import "@fontsource/inter"; // Defaults to 400 (normal)
-
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Hook pour la redirection
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:5050/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, mot_de_passe: password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("Connexion réussie !");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        // Rediriger en fonction du rôle de l'utilisateur
+        if (data.user.role === "candidat") {
+          navigate("/home"); // Redirige vers la page d'accueil
+        } else if (data.user.role === "recruteur") {
+          navigate("/dashboard"); // Redirige vers le dashboard
+        } else {
+          alert("Rôle inconnu !");
+        }
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+      alert("Erreur lors de la connexion !");
+    }
+  };
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "500px" }}>
-        
         {/* Left side - Form */}
         <div className="col-md-6 d-flex flex-column justify-content-center h-100">
-          <h2 className="mb-4 fw-bold" style={{ color: '#00327D', fontFamily: 'Inter' }}>
+          <h2 className="mb-4 fw-bold" style={{ color: "#00327D", fontFamily: "Inter" }}>
             Sign up now and unlock new job opportunities!
           </h2>
-          <form>
+          <form onSubmit={handleLogin}>
             {/* Email Input */}
             <div className="mb-3 position-relative">
               <input
@@ -47,33 +77,35 @@ function Login() {
             {/* Submit Button */}
             <button type="submit" className="w-100" style={{ 
               backgroundColor: "#00327D", 
-              border: '1px solid white', 
-              borderRadius: '30px', 
+              border: "1px solid white", 
+              borderRadius: "30px", 
               padding: "5px", 
-              color: 'white', 
+              color: "white", 
               fontSize: "18px", 
-              fontWeight: 'bold', 
-              fontFamily: 'Inter' 
+              fontWeight: "bold", 
+              fontFamily: "Inter" 
             }}>
               Log In
             </button>
           </form>
         </div>
-    
+
         {/* Right side - Image with overlay text */}
         <div className="col-md-6 d-none d-md-block h-100 position-relative overflow-hidden">
           <img src="login.jpg" alt="Sign Up" className="img-fluid w-100 h-100 rounded" style={{ objectFit: "cover" }} />
           <div className="position-absolute top-50 start-50 translate-middle text-white text-center" style={{ width: "80%" }}>
             <h2>Vous n'avez pas encore de compte ?</h2>
             <p className="text-white">Créez dès maintenant votre compte en quelques minutes</p>
-            <button className="" style={{backgroundColor:'#0078BB',border:'none',borderRadius:'15px',padding:'8px'}}>
-                <Link to='/SignUp' style={{color:'white',textDecoration:'none'}}>S’inscrire ou activer mon compte</Link>
-                
-                </button>
+            <button className="" style={{ backgroundColor: "#0078BB", border: "none", borderRadius: "15px", padding: "8px" }}>
+              <Link to="/SignUp" style={{ color: "white", textDecoration: "none" }}>
+                S’inscrire ou activer mon compte
+              </Link>
+            </button>
           </div>
         </div>
         
       </div>
+
     </div>
   );
 }
