@@ -11,7 +11,7 @@ function Sidebar() {
         const userData = localStorage.getItem("user");
         if (userData) {
             const user = JSON.parse(userData);
-            setAdmin({ name: user.nom, email: user.email }); // Assurez-vous que les clés correspondent à votre backend
+            setAdmin({ name: user.nom, email: user.email });
         }
     }, []);
 
@@ -24,25 +24,22 @@ function Sidebar() {
 
                 {/* Navigation */}
                 <nav>
-                    <a href="" className="item">
+                    <Link to="/" className="item">
                         <FontAwesomeIcon icon={faHome} />
                         <span>Home</span>
-                    </a>
+                    </Link>
                     <Link to="/manage-candidatures" className="item">
-        <FontAwesomeIcon icon={faFileAlt} />
-        <span>Manage Candidatures</span>
-    </Link>
-
-    <Link to="/post-job" className="item">
-        <FontAwesomeIcon icon={faFileAlt} />
-        <span>Post job</span>
-    </Link>
-                    <a href="" className="item">
+                        <FontAwesomeIcon icon={faFileAlt} />
+                        <span>Manage Candidatures</span>
+                    </Link>
+                    <Link to="/post-job" className="item">
+                        <FontAwesomeIcon icon={faFileAlt} />
+                        <span>Post job</span>
+                    </Link>
+                    <Link to="/planning" className="item">
                         <FontAwesomeIcon icon={faCalendar} />
                         <span>Planning des Entretiens</span>
-                    </a>
-
-                    
+                    </Link>
                 </nav>
             </div>
         </div>
