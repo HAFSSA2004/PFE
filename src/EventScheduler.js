@@ -1,34 +1,48 @@
-function EventScheduler() {
-    const createEvent = () => {
-        const event = {
-            summary: "Entretien d'embauche",
-            location: "En ligne",
-            description: "Entretien pour le poste de développeur.",
-            start: {
-                dateTime: "2024-06-10T10:00:00-07:00", // Remplace par la vraie date
-                timeZone: "Europe/Paris",
-            },
-            end: {
-                dateTime: "2024-06-10T11:00:00-07:00",
-                timeZone: "Europe/Paris",
-            },
-            attendees: [{ email: "candidat@example.com" }],
-            reminders: {
-                useDefault: false,
-                overrides: [{ method: "email", minutes: 30 }],
-            },
-        };
+import React from "react";
+import { gapi } from "gapi-script";
 
-        gapi.client.calendar.events.insert({
-            calendarId: "primary",
-            resource: event,
-        }).then((response) => {
+function EventScheduler() {
+    const createEvent = async () => {
+        try {
+            // Check if user is authenticated
+            const authInstance = gapi.auth2.getAuthInstance();
+            if (!authInstance.isSignedIn.get()) {
+                alert("Veuillez vous connecter d'abord.");
+                return;
+            }
+
+            const event = {
+                summary: "Entretien d'embauche",
+                location: "En ligne",
+                description: "Entretien pour le poste de développeur.",
+                start: {
+                    dateTime: new Date(new Date().setHours(new Date().getHours() + 1)).toISOString(),
+                    timeZone: "Europe/Paris",
+                },
+                end: {
+                    dateTime: new Date(new Date().setHours(new Date().getHours() + 2)).toISOString(),
+                    timeZone: "Europe/Paris",
+                },
+                attendees: [{ email: "candidat@example.com" }],
+                reminders: {
+                    useDefault: false,
+                    overrides: [{ method: "email", minutes: 30 }],
+                },
+            };
+
+            const response = await gapi.client.calendar.events.insert({
+                calendarId: "primary",
+                resource: event,
+            });
+
             alert("Entretien planifié !");
             console.log("Événement ajouté :", response);
-        }).catch((error) => {
+        } catch (error) {
             console.error("Erreur lors de la création de l’événement :", error);
-        });
+        }
     };
 
     return <button onClick={createEvent}>Planifier l'entretien</button>;
 }
+
+export default EventScheduler;

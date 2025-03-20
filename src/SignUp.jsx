@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Nav from './Navbar';
 function Signup() {
   const [role, setRole] = useState("candidat");
   const [name, setName] = useState("");
@@ -39,7 +39,9 @@ function Signup() {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+   <div>
+    <Nav/>
+     <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "500px" }}>
         <div className="col-md-6 d-flex flex-column justify-content-center h-100">
           <h2 className="mb-4 fw-bold" style={{ color: "#00327D", fontFamily: "Inter" }}>
@@ -79,6 +81,7 @@ function Signup() {
         </div>
       </div>
     </div>
+   </div>
   );
 }
 

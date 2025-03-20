@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-//import Dashboard from "./Dashboard";
+import Dashboard from "./Dashboard";
 
 function ManageCandidatures() {
     const [candidatures, setCandidatures] = useState([]);
@@ -30,7 +30,8 @@ function ManageCandidatures() {
     
 
     return (
-        <div className="container">    
+        <div className="container"> 
+        <Dashboard/>   
             <h2 className="my-4">Suivi des Candidatures</h2>
             <table className="table">
                 <thead>

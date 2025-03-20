@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
-
+import Nav from './Navbar';
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +42,9 @@ function Login() {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+   <div>
+    <Nav/>
+     <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "500px" }}>
         {/* Left side - Form */}
         <div className="col-md-6 d-flex flex-column justify-content-center h-100">
@@ -107,6 +109,7 @@ function Login() {
       </div>
 
     </div>
+   </div>
   );
 }
 

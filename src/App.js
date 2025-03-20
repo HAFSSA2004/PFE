@@ -10,12 +10,13 @@ import Dashboard from "./Dashboard";
 import ManageCandidatures from './ManageCandidatures.js';
 import OffreDetail from './OffreDetail';
 import {  Routes, Route } from 'react-router-dom';
+import GoogleCalendar from './GoogleCalendar.js';
 
 
 function App() {
   return (
     <div className="App">
-      <Nav />
+     
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path="/offre/:id" element={<OffreDetail />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
+        <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
       </Routes>
       
       <Footer/>

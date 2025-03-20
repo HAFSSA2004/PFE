@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Home.css';
+import Nav from './Navbar';
 import Annonce from './Annoce';
 
 const Home = () => {
@@ -17,6 +18,8 @@ const Home = () => {
   }, []);
 
   return (
+   <div>
+        <Nav/>
     <div className="back">
       <div className="custom-container">
         <h2 className="title text-center">
@@ -51,6 +54,10 @@ const Home = () => {
       </div>
       <Annonce />
     </div>
+   </div>
+
+
+    
   );
 };
 
