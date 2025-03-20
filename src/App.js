@@ -27,7 +27,7 @@ function App() {
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
       </Routes>
       
-      <Footer/>
+    
     </div>
    
   );

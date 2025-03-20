@@ -1,0 +1,67 @@
+/* Conteneur principal */
+.manage-candidatures-container {
+    display: flex;  /* Utilisation de flexbox */
+    height: 100vh;  /* Hauteur de la fenêtre */
+    background-color: #f5f6fa; /* Couleur de fond */
+    align-items: stretch; /* Pour s'assurer que la sidebar et le tableau s'étendent sur toute la hauteur */
+}
+
+/* Sidebar : Largeur fixe */
+.sidebar {
+    width: 270px;  /* Largeur fixe pour la sidebar */
+    background: #00327D;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    height: 450px;  
+    margin-top: 5.5%;
+    /* Hauteur pleine de la fenêtre */
+}
+
+/* Table container : Prend l'espace restant avec flex-grow et centre le contenu */
+.table-container {
+    flex-grow: 1;  /* Prend tout l'espace restant */
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    padding: 10px;
+    overflow-y: auto;
+    margin-bottom: 5%;
+}
+
+/* Style du tableau */
+.table {
+    width: 100%;  /* Largeur du tableau (80% de l'espace disponible) */
+    border-collapse: collapse;
+  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white; /* Fond blanc pour le tableau */
+    border-radius: 8px; /* Bordures arrondies */
+}
+
+.table th, .table td {
+    padding: 15px 20px;  /* Espacement interne plus grand */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* Mettre une couleur différente sur les en-têtes */
+.table th {
+    background-color: #00327D;
+    color: white;
+    font-weight: bold;
+}
+
+/* Style des lignes impaires pour un effet de zébrage */
+.table tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Style au survol des lignes */
+.table tr:hover {
+    background-color: #f1f1f1;
+}
