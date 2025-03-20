@@ -4,9 +4,8 @@ import { gapi } from "gapi-script";
 function EventScheduler() {
     const createEvent = async () => {
         try {
-            // Check if user is authenticated
-            const authInstance = gapi.auth2.getAuthInstance();
-            if (!authInstance.isSignedIn.get()) {
+            const token = gapi.auth.getToken();
+            if (!token) {
                 alert("Veuillez vous connecter d'abord.");
                 return;
             }
@@ -45,4 +44,4 @@ function EventScheduler() {
     return <button onClick={createEvent}>Planifier l'entretien</button>;
 }
 
-export default EventScheduler;
+export default EventScheduler; 

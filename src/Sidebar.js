@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faFileAlt, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import './slid.css';
+
 
 function Sidebar() {
     const [admin, setAdmin] = useState({ name: "Admin", email: "admin@gmail.com" });
@@ -16,25 +16,22 @@ function Sidebar() {
     }, []);
 
     return (
-        <div className="content">
-            <div className="c">
-                {/* Section Profil */}
-                <h2 className="font-bold">{admin.name}</h2>
-                <p className="text">{admin.email}</p>
+            <div className="sidebar">
+                <h2 className="admin-name">{admin.name}</h2>
+                <p className="admin-email">{admin.email}</p>
 
-                {/* Navigation */}
                 <nav>
-                    <Link to="/" className="item">
+                    <Link to="/" className="nav-item">
                         <FontAwesomeIcon icon={faHome} />
-                        <span>Home</span>
+                        <span>Accueil</span>
                     </Link>
-                    <Link to="/manage-candidatures" className="item">
+                    <Link to="/manage-candidatures" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
-                        <span>Manage Candidatures</span>
+                        <span>Gérer les Candidatures</span>
                     </Link>
-                    <Link to="/post-job" className="item">
+                    <Link to="/post-job" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
-                        <span>Post job</span>
+                        <span>Publier une Offre</span>
                     </Link>
                     <Link to="/GoogleCalendar" className="item">
                         <FontAwesomeIcon icon={faCalendar} />
@@ -42,7 +39,7 @@ function Sidebar() {
                     </Link>
                 </nav>
             </div>
-        </div>
+
     );
 }
 

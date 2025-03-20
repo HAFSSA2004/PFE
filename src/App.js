@@ -1,5 +1,5 @@
 import './App.css';
-import Nav from './Navbar';
+//import Nav from './Navbar';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
@@ -28,8 +28,10 @@ function App() {
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
         <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
       </Routes>
+
+      <Footer />
       
-      <Footer/>
+    
     </div>
    
   );
