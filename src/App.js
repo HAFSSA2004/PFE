@@ -26,6 +26,8 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
       </Routes>
+
+      <Footer />
       
     
     </div>
