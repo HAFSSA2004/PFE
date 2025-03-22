@@ -25,6 +25,17 @@ function ManageCandidatures() {
         }
     }, [recruteurId]);
 
+    // Fonction pour mettre à jour le statut
+    const updateStatut = (id, newStatut) => {
+        axios.put(`http://localhost:5050/candidatures/${id}/statut`, { statut: newStatut })
+            .then(response => {
+                setCandidatures(candidatures.map(c => 
+                    c._id === id ? { ...c, statut: newStatut } : c
+                ));
+            })
+            .catch(error => console.error("❌ Erreur lors de la mise à jour du statut :", error));
+    };
+
     return (
         <div className="manage-candidatures-container">
             <Sidebar />
@@ -49,7 +60,16 @@ function ManageCandidatures() {
                                 <td>
                                     <a href={`http://localhost:5050/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
                                 </td>
-                                <td>{candidature.statut}</td>
+                                <td>
+                                    <select 
+                                        value={candidature.statut} 
+                                        onChange={(e) => updateStatut(candidature._id, e.target.value)}
+                                    >
+                                        <option value="en cours">En cours</option>
+                                        <option value="acceptée">Acceptée</option>
+                                        <option value="refusée">Refusée</option>
+                                    </select>
+                                </td>
                                 <td>{new Date(candidature.date_postulation).toLocaleDateString()}</td>
                             </tr>
                         ))}

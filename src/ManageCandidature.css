@@ -29,7 +29,9 @@
     align-items: center; /* Centrer verticalement */
     padding: 10px;
     overflow-y: auto;
-    margin-bottom: 5%;
+   margin-top: 70px;
+    overflow-y: hidden;
+    
 }
 
 /* Style du tableau */
@@ -39,9 +41,30 @@
   
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: white; /* Fond blanc pour le tableau */
-    border-radius: 8px; /* Bordures arrondies */
+    border-radius: 12px; /* Bordures arrondies */
+}
+.table a {
+    color: #00327D;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
+.table a:hover {
+    text-decoration: underline;
+    color: #001f4d;
+}
+select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    background-color: white;
+    cursor: pointer;
+}
+.table thead {
+    border-top-right-radius: 10px;
+
+}
 .table th, .table td {
     padding: 15px 20px;  /* Espacement interne plus grand */
     text-align: left;

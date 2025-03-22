@@ -44,4 +44,4 @@ function EventScheduler() {
     return <button onClick={createEvent}>Planifier l'entretien</button>;
 }
 
-export default EventScheduler; 
+export default EventScheduler;

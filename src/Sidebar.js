@@ -33,7 +33,7 @@ function Sidebar() {
                         <FontAwesomeIcon icon={faFileAlt} />
                         <span>Publier une Offre</span>
                     </Link>
-                    <Link to="/GoogleCalendar" className="item">
+                    <Link to="/GoogleCalendar" className="nav-item">
                         <FontAwesomeIcon icon={faCalendar} />
                         <span>Planning des Entretiens</span>
                     </Link>

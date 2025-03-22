@@ -137,7 +137,7 @@ nav {
     gap: 20px;
     width: 100%;
     padding: 20px;
-    margin-top: 40px; /* Espacement entre le tableau de bord et les statistiques */
+    margin-top: 20px; /* Espacement entre le tableau de bord et les statistiques */
 }
 
 /* Style des éléments statistiques */

@@ -7,13 +7,12 @@ const API_KEY = "AIzaSyB7XugS7slIAgcHijhwRnVu-ln47EhU1OM";
 const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
-const GoogleCalendar = () => {
+function GoogleCalendar() {
     const [signedIn, setSignedIn] = useState(false);
     const [candidatures, setCandidatures] = useState([]);
     const [recruteurId, setRecruteurId] = useState(null);
     const [emailCandidat, setEmailCandidat] = useState("");
-
-    // Récupérer l'ID du recruteur depuis le token localStorage
+    
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -22,21 +21,18 @@ const GoogleCalendar = () => {
         }
     }, []);
 
-    // Récupérer les candidatures confirmées du recruteur
     useEffect(() => {
         if (recruteurId) {
-            axios
-                .get(`http://localhost:5050/candidatures/confirmees/${recruteurId}`)
+            axios.get(`http://localhost:5050/candidatures/confirmees/${recruteurId}`)
                 .then(response => setCandidatures(response.data))
                 .catch(error => console.error("Erreur lors de la récupération des candidatures :", error));
         }
     }, [recruteurId]);
 
-    // Initialisation de l'API Google
     useEffect(() => {
-        const start = async () => {
-            try {
-                gapi.load("client:auth2", async () => {
+        function start() {
+            gapi.load("client:auth2", async () => {
+                try {
                     await gapi.client.init({
                         apiKey: API_KEY,
                         clientId: CLIENT_ID,
@@ -46,15 +42,14 @@ const GoogleCalendar = () => {
                     const authInstance = gapi.auth2.getAuthInstance();
                     setSignedIn(authInstance.isSignedIn.get());
                     authInstance.isSignedIn.listen(setSignedIn);
-                });
-            } catch (error) {
-                console.error("Erreur d'initialisation GAPI :", error);
-            }
-        };
+                } catch (error) {
+                    console.error("Erreur d'initialisation GAPI :", error);
+                }
+            });
+        }
         start();
     }, []);
 
-    // Connexion à Google
     const signIn = async () => {
         try {
             await gapi.auth2.getAuthInstance().signIn();
@@ -64,7 +59,6 @@ const GoogleCalendar = () => {
         }
     };
 
-    // Déconnexion de Google
     const signOut = async () => {
         try {
             await gapi.auth2.getAuthInstance().signOut();
@@ -74,10 +68,9 @@ const GoogleCalendar = () => {
         }
     };
 
-    // Planification d'un entretien
     const scheduleInterview = async () => {
-        if (!emailCandidat.trim()) {
-            alert("Veuillez entrer l'email du candidat.");
+        if (!emailCandidat) {
+            alert("Veuillez entrer l'email du candidat");
             return;
         }
 
@@ -90,7 +83,7 @@ const GoogleCalendar = () => {
                 timeZone: "Europe/Paris",
             },
             end: {
-                dateTime: new Date(Date.now() + 30 * 60000).toISOString(),
+                dateTime: new Date(new Date().getTime() + 30 * 60000).toISOString(),
                 timeZone: "Europe/Paris",
             },
             attendees: [{ email: emailCandidat }],
@@ -108,76 +101,64 @@ const GoogleCalendar = () => {
                 calendarId: "primary",
                 resource: event,
             });
-            alert("Entretien planifié et invitation envoyée !");
-            setEmailCandidat(""); // Réinitialiser l'input après l'envoi
+            alert("Entretien planifié et invitation envoyée");
         } catch (error) {
             console.error("Erreur lors de la planification :", error);
         }
     };
 
     return (
-        <div className="container">
+        <div>
             {!signedIn ? (
-                <button className="btn-login" onClick={signIn}>Se connecter avec Google</button>
+                <button onClick={signIn}>Se connecter avec Google</button>
             ) : (
                 <div>
-                    <button className="btn-logout" onClick={signOut}>Se déconnecter</button>
+                    <button onClick={signOut}>Se déconnecter</button>
                     <h2>Planifier un entretien</h2>
-                    <div className="form-group">
-                        <input
-                            type="email"
-                            placeholder="Email du candidat"
-                            value={emailCandidat}
-                            onChange={(e) => setEmailCandidat(e.target.value)}
-                            className="input-field"
-                        />
-                        <button className="btn-planifier" onClick={scheduleInterview}>Planifier</button>
-                    </div>
-
+                    <input
+                        type="email"
+                        placeholder="Email du candidat"
+                        value={emailCandidat}
+                        onChange={(e) => setEmailCandidat(e.target.value)}
+                    />
+                    <button onClick={scheduleInterview}>Planifier</button>
                     <h2>Candidatures Confirmées</h2>
-                    <table className="table table-striped table-hover text-center">
-    <thead className="table-dark">
-        <tr>
-            <th>Offre</th>
-            <th>CV</th>
-            <th>Lettre de Motivation</th>
-            <th>Statut</th>
-            <th>Date de Postulation</th>
-        </tr>
-    </thead>
-    <tbody>
-        {candidatures.length > 0 ? (
-            candidatures.map(({ _id, id_offre, cv, lettre_motivation, statut, date_postulation }) => (
-                <tr key={_id}>
-                    <td>{id_offre?.titre || "N/A"}</td>
-                    <td>
-                        <a href={`http://localhost:5050/${cv}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
-                            <i className="bi bi-file-earmark-text"></i> Voir CV
-                        </a>
-                    </td>
-                    <td>
-                        <a href={`http://localhost:5050/${lettre_motivation}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary btn-sm">
-                            <i className="bi bi-file-earmark-richtext"></i> Voir Lettre
-                        </a>
-                    </td>
-                    <td className={statut === "Accepté" ? "text-success fw-bold" : statut === "Rejeté" ? "text-danger fw-bold" : "text-warning fw-bold"}>
-                        {statut}
-                    </td>
-                    <td>{new Date(date_postulation).toLocaleDateString()}</td>
-                </tr>
-            ))
-        ) : (
-            <tr>
-                <td colSpan="5" className="text-muted">Aucune candidature confirmée trouvée.</td>
-            </tr>
-        )}
-    </tbody>
-</table>
-
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Offre</th>
+                                <th>CV</th>
+                                <th>Lettre de Motivation</th>
+                                <th>Statut</th>
+                                <th>Date de Postulation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {candidatures.length > 0 ? (
+                                candidatures.map((candidature) => (
+                                    <tr key={candidature._id}>
+                                        <td>{candidature.id_offre ? candidature.id_offre.titre : "N/A"}</td>
+                                        <td>
+                                            <a href={`http://localhost:5050/${candidature.cv}`} target="_blank" rel="noopener noreferrer">Voir CV</a>
+                                        </td>
+                                        <td>
+                                            <a href={`http://localhost:5050/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
+                                        </td>
+                                        <td>{candidature.statut}</td>
+                                        <td>{new Date(candidature.date_postulation).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5">Aucune candidature confirmée trouvée.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
                 </div>
             )}
         </div>
     );
-};
+}
 
 export default GoogleCalendar;
