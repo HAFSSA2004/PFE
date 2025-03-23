@@ -65,7 +65,7 @@ useEffect(() => {
                         <FontAwesomeIcon icon={faFileAlt} />
                         <span>Gérer  Candidatures</span>
                     </Link>
-                    <Link to="/post-job" className="nav-item">
+                    <Link to="/PostJob" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
                         <span>Publier une Offre</span>
                     </Link>
