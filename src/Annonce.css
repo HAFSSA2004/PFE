@@ -3,18 +3,20 @@
     padding: 8px;
     border-radius: 30px;
 }
-.cont{
-
+.cont {
+    z-index: 2;
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
+    position: relative; /* Ajoute ceci */
 }
+
 .job-card {
     background: white;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 280px;
-    padding: 15px;
+    width: 350px;
+    padding: 25px;
     margin-top: 30px;
     text-align: center;
 }

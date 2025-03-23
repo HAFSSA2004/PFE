@@ -43,10 +43,10 @@ const Navbar = () => {
           </ul>
 
           <div className="d-flex align-items-center flex-nowrap">
-            <Link to='/Login' className="btn btn-primary btnS me-2">Sign In</Link>
+            <Link to='/Login' className="btn btn-primary  btnS me-2">Sign In</Link>
             <Link to='/Signup' className="btn btn-outline-primary me-3">Register</Link>
             <div className="vr"></div>
-            <Link to="/post-job" className="ms-2 text-decoration-none text-muted text-nowrap">
+            <Link to="/PostJob" className="ms-2 text-decoration-none text-muted text-nowrap">
               Entreprises/Publier Une Offre D'Emploi
             </Link>
           </div>
