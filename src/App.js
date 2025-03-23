@@ -11,6 +11,7 @@ import ManageCandidatures from './ManageCandidatures.js';
 import OffreDetail from './OffreDetail';
 import {  Routes, Route } from 'react-router-dom';
 import GoogleCalendar from './GoogleCalendar.js';
+//import EmployerSignup from './Post.jsx';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
         <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
+      
       </Routes>
 
       <Footer />

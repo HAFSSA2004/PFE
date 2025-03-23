@@ -1,14 +1,17 @@
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faFileAlt, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faFileAlt, faCalendar, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './slid.css';
 
 function Dashboard() {
-    const [admin,setAdmin] = useState({ name: "Admin", email: "admin@gmail.com" });
+    const [admin, setAdmin] = useState({ name: "Admin", email: "admin@gmail.com" });
     const [stats, setStats] = useState({ en_cours: 0, refusees: 0, acceptees: 0 });
     const [recruteurId, setRecruteurId] = useState(null);
-    const [loading, setLoading] = useState(true); // État pour indiquer si les données chargent
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate(); // Hook pour la redirection
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -20,34 +23,37 @@ function Dashboard() {
         }
     }, []);
 
-// 2️⃣ Exécuter la requête API **uniquement** quand recruteurId est défini
-useEffect(() => {
-    if (recruteurId) {
-        console.log("📡 Envoi de la requête API avec ID:", recruteurId);
-        fetch(`http://localhost:5050/candidatures/statistiques/${recruteurId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("📊 Données reçues :", data);
-                if (data.statistiques) {
-                    setStats(data.statistiques);
-                }
-            })
-            .catch(error => console.error("❌ Erreur API :", error))
-            .finally(() => setLoading(false)); // Marquer la fin du chargement
-    }
-}, [recruteurId]); // Déclencher la requête seulement quand recruteurId change
-
+    useEffect(() => {
+        if (recruteurId) {
+            console.log("📡 Envoi de la requête API avec ID:", recruteurId);
+            fetch(`http://localhost:5050/candidatures/statistiques/${recruteurId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("📊 Données reçues :", data);
+                    if (data.statistiques) {
+                        setStats(data.statistiques);
+                    }
+                })
+                .catch(error => console.error("❌ Erreur API :", error))
+                .finally(() => setLoading(false));
+        }
+    }, [recruteurId]);
 
     useEffect(() => {
-        // Récupérer l'utilisateur connecté depuis le localStorage
         const userData = localStorage.getItem("user");
         if (userData) {
             const user = JSON.parse(userData);
             setAdmin({ name: user.nom, email: user.email });
-
-            // Appel API pour récupérer les statistiques des candidatures
         }
     }, []);
+
+    // Fonction de déconnexion
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        console.log("🚪 Déconnexion réussie !");
+        navigate("/login"); // Redirection vers la page de connexion
+    };
 
     return (
         <div className="dashboard-container">
@@ -63,7 +69,7 @@ useEffect(() => {
                     </Link>
                     <Link to="/manage-candidatures" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
-                        <span>Gérer  Candidatures</span>
+                        <span>Gérer Candidatures</span>
                     </Link>
                     <Link to="/post-job" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
@@ -73,6 +79,11 @@ useEffect(() => {
                         <FontAwesomeIcon icon={faCalendar} />
                         <span>Des Entretiens</span>
                     </Link>
+                    {/* Bouton de déconnexion */}
+                    <button className="logout-button" onClick={handleLogout}>
+                        <FontAwesomeIcon icon={faSignOutAlt} />
+                        <span>Se déconnecter</span>
+                    </button>
                 </nav>
             </aside>
 
@@ -83,7 +94,7 @@ useEffect(() => {
                 {/* Partie Statistiques */}
                 <div className="dashboard-widgets">
                     {loading ? (
-                        <p>Chargement des statistiques...</p> // ✅ Affichage d'un message de chargement
+                        <p>Chargement des statistiques...</p>
                     ) : (
                         <>
                             <div className="widget">
@@ -101,7 +112,6 @@ useEffect(() => {
                         </>
                     )}
                 </div>
-
             </main>
         </div>
     );
