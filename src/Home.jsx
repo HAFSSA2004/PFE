@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Home.css';
 import Nav from './Navbar';
-//import Annonce from './Annoce';   <Annonce />
+import Annonce from './Annoce';
 
 const Home = () => {
   const [villes, setVilles] = useState([]);
@@ -22,7 +22,12 @@ const Home = () => {
         <Nav/>
     <div className="back">
       <div className="custom-container">
-        
+        <h2 className="title text-center">
+          Trouvez Votre Emploi Idéal ou Recrutez les Meilleurs Talents
+        </h2>
+        <p className="subtitle">
+          Des milliers d'opportunités vous attendent. Déposez votre CV ou publiez une offre en un clic.
+        </p>
 
         {/* Barre de recherche */}
         <div className="search-container">
@@ -47,7 +52,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    
+      <Annonce />
     </div>
    </div>
 
