@@ -11,8 +11,11 @@ import ManageCandidatures from './ManageCandidatures.js';
 import OffreDetail from './OffreDetail';
 import {  Routes, Route } from 'react-router-dom';
 import GoogleCalendar from './GoogleCalendar.js';
-//import EmployerSignup from './Post.jsx';
-
+import PostJob from './PostJob.jsx';
+//import PostJob2 from './PostJob2.js';
+//import PostJob3 from './PostJob3.js';
+//import PostJob4 from './PostJob4.js';
+import MonOffre from './MonOffre.jsx';
 
 function App() {
   return (
@@ -28,7 +31,10 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
         <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
-      
+        <Route path="/PostJob" element={<PostJob />} />
+        <Route path="/offres/recruteur/:id" element={<MonOffre />} />
+
+        
       </Routes>
 
       <Footer />

@@ -1,4 +1,3 @@
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faFileAlt, faCalendar, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
@@ -10,14 +9,18 @@ function Dashboard() {
     const [stats, setStats] = useState({ en_cours: 0, refusees: 0, acceptees: 0 });
     const [recruteurId, setRecruteurId] = useState(null);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); // Hook pour la redirection
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            const payload = JSON.parse(atob(token.split(".")[1]));
-            console.log("🔑 ID Recruteur récupéré:", payload.id);
-            setRecruteurId(payload.id);
+            try {
+                const payload = JSON.parse(atob(token.split(".")[1]));
+                console.log("🔑 ID Recruteur récupéré:", payload.id);
+                setRecruteurId(payload.id);
+            } catch (error) {
+                console.error("⚠️ Erreur lors du décodage du token :", error);
+            }
         } else {
             console.error("⚠️ Aucun token trouvé !");
         }
@@ -27,7 +30,10 @@ function Dashboard() {
         if (recruteurId) {
             console.log("📡 Envoi de la requête API avec ID:", recruteurId);
             fetch(`http://localhost:5050/candidatures/statistiques/${recruteurId}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) throw new Error("Erreur de récupération des statistiques");
+                    return response.json();
+                })
                 .then(data => {
                     console.log("📊 Données reçues :", data);
                     if (data.statistiques) {
@@ -47,17 +53,15 @@ function Dashboard() {
         }
     }, []);
 
-    // Fonction de déconnexion
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         console.log("🚪 Déconnexion réussie !");
-        navigate("/login"); // Redirection vers la page de connexion
+        navigate("/login"); 
     };
 
     return (
         <div className="dashboard-container">
-            {/* Sidebar */}
             <aside className="sidebar">
                 <h2 className="admin-name">{admin.name}</h2>
                 <p className="admin-email">{admin.email}</p>
@@ -71,7 +75,7 @@ function Dashboard() {
                         <FontAwesomeIcon icon={faFileAlt} />
                         <span>Gérer Candidatures</span>
                     </Link>
-                    <Link to="/post-job" className="nav-item">
+                    <Link to="/PostJob" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
                         <span>Publier une Offre</span>
                     </Link>
@@ -79,19 +83,24 @@ function Dashboard() {
                         <FontAwesomeIcon icon={faCalendar} />
                         <span>Des Entretiens</span>
                     </Link>
-                    {/* Bouton de déconnexion */}
-                    <button className="logout-button" onClick={handleLogout}>
+                    
+                    {recruteurId && (
+                        <Link to={`/offres/recruteur/${recruteurId}`} className="nav-item">
+                            <FontAwesomeIcon icon={faCalendar} />
+                            <span>Mes Offres</span>
+                        </Link>
+                    )}
+
+                    <button className="logout-button nav-item pd-4" onClick={handleLogout}>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                         <span>Se déconnecter</span>
                     </button>
                 </nav>
             </aside>
 
-            {/* Contenu principal */}
             <main className="dashboard-content">
                 <h1>Tableau de Bord</h1>
 
-                {/* Partie Statistiques */}
                 <div className="dashboard-widgets">
                     {loading ? (
                         <p>Chargement des statistiques...</p>

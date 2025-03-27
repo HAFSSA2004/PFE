@@ -1,0 +1,23 @@
+.container {
+    max-width: 800px;
+  }
+  
+  .header-container {
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .header-image {
+    width: 200px;
+    height: auto;
+  }
+  
+  textarea {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  button {
+    padding: 10px 20px;
+  }
+  

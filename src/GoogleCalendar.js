@@ -109,7 +109,7 @@ const GoogleCalendar = () => {
                 resource: event,
             });
             alert("Entretien planifié et invitation envoyée !");
-            setEmailCandidat(""); // Réinitialiser l'input après l'envoi
+            setEmailCandidat("");
         } catch (error) {
             console.error("Erreur lors de la planification :", error);
         }
@@ -136,44 +136,43 @@ const GoogleCalendar = () => {
 
                     <h2>Candidatures Confirmées</h2>
                     <table className="table table-striped table-hover text-center">
-    <thead className="table-dark">
-        <tr>
-            <th>Offre</th>
-            <th>CV</th>
-            <th>Lettre de Motivation</th>
-            <th>Statut</th>
-            <th>Date de Postulation</th>
-        </tr>
-    </thead>
-    <tbody>
-        {candidatures.length > 0 ? (
-            candidatures.map(({ _id, id_offre, cv, lettre_motivation, statut, date_postulation }) => (
-                <tr key={_id}>
-                    <td>{id_offre?.titre || "N/A"}</td>
-                    <td>
-                        <a href={`http://localhost:5050/${cv}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
-                            <i className="bi bi-file-earmark-text"></i> Voir CV
-                        </a>
-                    </td>
-                    <td>
-                        <a href={`http://localhost:5050/${lettre_motivation}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary btn-sm">
-                            <i className="bi bi-file-earmark-richtext"></i> Voir Lettre
-                        </a>
-                    </td>
-                    <td className={statut === "Accepté" ? "text-success fw-bold" : statut === "Rejeté" ? "text-danger fw-bold" : "text-warning fw-bold"}>
-                        {statut}
-                    </td>
-                    <td>{new Date(date_postulation).toLocaleDateString()}</td>
-                </tr>
-            ))
-        ) : (
-            <tr>
-                <td colSpan="5" className="text-muted">Aucune candidature confirmée trouvée.</td>
-            </tr>
-        )}
-    </tbody>
-</table>
-
+                        <thead className="table-dark">
+                            <tr>
+                                <th>Offre</th>
+                                <th>CV</th>
+                                <th>Lettre de Motivation</th>
+                                <th>Statut</th>
+                                <th>Date de Postulation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {candidatures.length > 0 ? (
+                                candidatures.map(({ _id, id_offre, cv, lettre_motivation, statut, date_postulation }) => (
+                                    <tr key={_id}>
+                                        <td>{id_offre?.titre || "N/A"}</td>
+                                        <td>
+                                            <a href={`http://localhost:5050/${cv}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
+                                                <i className="bi bi-file-earmark-text"></i> Voir CV
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href={`http://localhost:5050/${lettre_motivation}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary btn-sm">
+                                                <i className="bi bi-file-earmark-richtext"></i> Voir Lettre
+                                            </a>
+                                        </td>
+                                        <td className={statut === "Accepté" ? "text-success fw-bold" : statut === "Rejeté" ? "text-danger fw-bold" : "text-warning fw-bold"}>
+                                            {statut}
+                                        </td>
+                                        <td>{new Date(date_postulation).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5" className="text-muted">Aucune candidature confirmée trouvée.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
                 </div>
             )}
         </div>
