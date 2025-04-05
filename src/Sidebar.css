@@ -1,0 +1,56 @@
+/* Sidebar Component Styles */
+.sidebar-component {
+    width: 250px;
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.admin-email {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Ensures the text is truncated if it's too long */
+    text-overflow: ellipsis; /* Adds "..." if text overflows */
+}
+
+.nav-item:hover {
+    background-color: #495057;
+}
+
+.nav-item .fa {
+    margin-right: 10px;
+}
+
+/* Ensure sidebar stays fixed and full height */
+.sidebar-component {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+}

@@ -1,90 +1,117 @@
-/* Conteneur principal */
-.manage-candidatures-container {
-    display: flex;  /* Utilisation de flexbox */
-    height: 100vh;  /* Hauteur de la fenêtre */
-    background-color: #f5f6fa; /* Couleur de fond */
-    align-items: stretch; /* Pour s'assurer que la sidebar et le tableau s'étendent sur toute la hauteur */
-}
+    .manage-candidatures-container {
+        display: flex;
+        background-color: #f5f6fa;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
 
-/* Sidebar : Largeur fixe */
-.sidebar {
-    width: 270px;  /* Largeur fixe pour la sidebar */
-    background: #00327D;
-    padding: 20px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
-    height: 450px;  
-    margin-top: 5.5%;
-    /* Hauteur pleine de la fenêtre */
-}
+    .sidebar {
+        width: 370px;
+        background: #00327D;
+        padding: 20px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+        position: sticky;
+        top: 0;
+        height: 100vh;
+    }
 
-/* Table container : Prend l'espace restant avec flex-grow et centre le contenu */
-.table-container {
-    flex-grow: 1;  /* Prend tout l'espace restant */
-    display: flex;
-    justify-content: center; /* Centrer horizontalement */
-    align-items: center; /* Centrer verticalement */
-    padding: 10px;
-    overflow-y: auto;
-   margin-top: 70px;
-    overflow-y: hidden;
-    
-}
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 40px;
+        flex-grow: 1;
+    }
 
-/* Style du tableau */
-.table {
-    width: 100%;  /* Largeur du tableau (80% de l'espace disponible) */
-    border-collapse: collapse;
-  
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: white; /* Fond blanc pour le tableau */
-    border-radius: 12px; /* Bordures arrondies */
-}
-.table a {
-    color: #00327D;
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s;
-}
+    .card-candidature {
+        position: relative;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease;
+    }
 
-.table a:hover {
-    text-decoration: underline;
-    color: #001f4d;
-}
-select {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    background-color: white;
-    cursor: pointer;
-}
-.table thead {
-    border-top-right-radius: 10px;
+    .card-candidature:hover {
+        transform: translateY(-5px);
+    }
 
-}
-.table th, .table td {
-    padding: 15px 20px;  /* Espacement interne plus grand */
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    font-size: 16px;
-}
+    .card-candidature h3 {
+        margin-bottom: 10px;
+        color: #00327D;
+        font-size: 18px;
+    }
 
-/* Mettre une couleur différente sur les en-têtes */
-.table th {
-    background-color: #00327D;
-    color: white;
-    font-weight: bold;
-}
+    .card-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
 
-/* Style des lignes impaires pour un effet de zébrage */
-.table tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
+    .card-links a {
+        color: #00327D;
+        font-weight: bold;
+        text-decoration: none;
+    }
 
-/* Style au survol des lignes */
-.table tr:hover {
-    background-color: #f1f1f1;
-}
+    .card-links a:hover {
+        text-decoration: underline;
+    }
+
+    .status-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+    .status-section select {
+        flex: 1;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        font-size: 14px;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .badge {
+        position: absolute;
+        top: -5%;
+        right: -1px;
+        padding: 10px 15px;
+        border-radius: 28px;
+        font-size: 14px;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: white;
+        z-index: 1;
+    }
+
+    .badge.accepted {
+        background-color: #2ecc71;
+    }
+
+    .badge.refused {
+        background-color: #e74c3c;
+    }
+
+    .badge.pending {
+        background-color: #f39c12;
+    }
+
+    .date-postulation {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+    }
