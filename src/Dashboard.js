@@ -1,57 +1,67 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faFileAlt, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faFileAlt, faCalendar, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './slid.css';
 
 function Dashboard() {
-    const [admin,setAdmin] = useState({ name: "Admin", email: "admin@gmail.com" });
+    const [admin, setAdmin] = useState({ name: "Admin", email: "admin@gmail.com" });
     const [stats, setStats] = useState({ en_cours: 0, refusees: 0, acceptees: 0 });
     const [recruteurId, setRecruteurId] = useState(null);
-    const [loading, setLoading] = useState(true); // État pour indiquer si les données chargent
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate(); 
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            const payload = JSON.parse(atob(token.split(".")[1]));
-            console.log("🔑 ID Recruteur récupéré:", payload.id);
-            setRecruteurId(payload.id);
+            try {
+                const payload = JSON.parse(atob(token.split(".")[1]));
+                console.log("🔑 ID Recruteur récupéré:", payload.id);
+                setRecruteurId(payload.id);
+            } catch (error) {
+                console.error("⚠️ Erreur lors du décodage du token :", error);
+            }
         } else {
             console.error("⚠️ Aucun token trouvé !");
         }
     }, []);
 
-// 2️⃣ Exécuter la requête API **uniquement** quand recruteurId est défini
-useEffect(() => {
-    if (recruteurId) {
-        console.log("📡 Envoi de la requête API avec ID:", recruteurId);
-        fetch(`http://localhost:5050/candidatures/statistiques/${recruteurId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("📊 Données reçues :", data);
-                if (data.statistiques) {
-                    setStats(data.statistiques);
-                }
-            })
-            .catch(error => console.error("❌ Erreur API :", error))
-            .finally(() => setLoading(false)); // Marquer la fin du chargement
-    }
-}, [recruteurId]); // Déclencher la requête seulement quand recruteurId change
-
+    useEffect(() => {
+        if (recruteurId) {
+            console.log("📡 Envoi de la requête API avec ID:", recruteurId);
+            fetch(`http://localhost:5050/candidatures/statistiques/${recruteurId}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Erreur de récupération des statistiques");
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("📊 Données reçues :", data);
+                    if (data.statistiques) {
+                        setStats(data.statistiques);
+                    }
+                })
+                .catch(error => console.error("❌ Erreur API :", error))
+                .finally(() => setLoading(false));
+        }
+    }, [recruteurId]);
 
     useEffect(() => {
-        // Récupérer l'utilisateur connecté depuis le localStorage
         const userData = localStorage.getItem("user");
         if (userData) {
             const user = JSON.parse(userData);
             setAdmin({ name: user.nom, email: user.email });
-
-            // Appel API pour récupérer les statistiques des candidatures
         }
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        console.log("🚪 Déconnexion réussie !");
+        navigate("/login"); 
+    };
+
     return (
         <div className="dashboard-container">
-            {/* Sidebar */}
             <aside className="sidebar">
                 <h2 className="admin-name">{admin.name}</h2>
                 <p className="admin-email">{admin.email}</p>
@@ -63,7 +73,7 @@ useEffect(() => {
                     </Link>
                     <Link to="/manage-candidatures" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
-                        <span>Gérer  Candidatures</span>
+                        <span>Gérer Candidatures</span>
                     </Link>
                     <Link to="/PostJob" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
@@ -73,17 +83,27 @@ useEffect(() => {
                         <FontAwesomeIcon icon={faCalendar} />
                         <span>Des Entretiens</span>
                     </Link>
+                    
+                    {recruteurId && (
+                        <Link to={`/offres/recruteur/${recruteurId}`} className="nav-item">
+                            <FontAwesomeIcon icon={faCalendar} />
+                            <span>Mes Offres</span>
+                        </Link>
+                    )}
+
+                    <button className="logout-button nav-item pd-4" onClick={handleLogout}>
+                        <FontAwesomeIcon icon={faSignOutAlt} />
+                        <span>Se déconnecter</span>
+                    </button>
                 </nav>
             </aside>
 
-            {/* Contenu principal */}
             <main className="dashboard-content">
                 <h1>Tableau de Bord</h1>
 
-                {/* Partie Statistiques */}
                 <div className="dashboard-widgets">
                     {loading ? (
-                        <p>Chargement des statistiques...</p> // ✅ Affichage d'un message de chargement
+                        <p>Chargement des statistiques...</p>
                     ) : (
                         <>
                             <div className="widget">
@@ -101,7 +121,6 @@ useEffect(() => {
                         </>
                     )}
                 </div>
-
             </main>
         </div>
     );

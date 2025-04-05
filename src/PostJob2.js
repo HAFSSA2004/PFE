@@ -40,12 +40,7 @@ const PostJob2 = () => {
           </div>
 
           {/* Lieu du poste */}
-          <div className="mb-3">
-            <label className="form-label">
-              Quel est le lieu du poste ? <span className="text-danger">*</span>
-            </label>
-            <input type="text" className="form-control" required />
-          </div>
+          
 
           {/* Type de contrat */}
           <div className="mb-3">

@@ -35,7 +35,7 @@ function Sidebar() {
                     </Link>
                     <Link to="/GoogleCalendar" className="nav-item">
                         <FontAwesomeIcon icon={faCalendar} />
-                        <span>Planning des Entretiens</span>
+                        <span style={{fontSize:'15px'}}>Planning  Entretiens</span>
                     </Link>
                 </nav>
             </div>

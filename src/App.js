@@ -12,10 +12,10 @@ import OffreDetail from './OffreDetail';
 import {  Routes, Route } from 'react-router-dom';
 import GoogleCalendar from './GoogleCalendar.js';
 import PostJob from './PostJob.jsx';
-import PostJob2 from './PostJob2.js';
-import PostJob3 from './PostJob3.js';
-import PostJob4 from './PostJob4.js';
-
+//import PostJob2 from './PostJob2.js';
+//import PostJob3 from './PostJob3.js';
+//import PostJob4 from './PostJob4.js';
+import MonOffre from './MonOffre.jsx';
 
 function App() {
   return (
@@ -32,10 +32,7 @@ function App() {
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
         <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
         <Route path="/PostJob" element={<PostJob />} />
-        <Route path="/PostJob2" element={<PostJob2 />} />
-        <Route path="/PostJob3" element={<PostJob3 />} />
-        <Route path="/PostJob4" element={<PostJob4 />} />
-
+        <Route path="/offres/recruteur/:id" element={<MonOffre />} />
 
         
       </Routes>

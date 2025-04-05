@@ -25,56 +25,63 @@ function ManageCandidatures() {
         }
     }, [recruteurId]);
 
-    // Fonction pour mettre à jour le statut
     const updateStatut = (id, newStatut) => {
         axios.put(`http://localhost:5050/candidatures/${id}/statut`, { statut: newStatut })
-            .then(response => {
-                setCandidatures(candidatures.map(c => 
-                    c._id === id ? { ...c, statut: newStatut } : c
-                ));
+            .then(() => {
+                setCandidatures(prev =>
+                    prev.map(c => c._id === id ? { ...c, statut: newStatut } : c)
+                );
             })
             .catch(error => console.error("❌ Erreur lors de la mise à jour du statut :", error));
+    };
+
+    const getBadgeClass = (statut) => {
+        switch (statut) {
+            case "acceptée":
+                return "badge accepted";
+            case "refusée":
+                return "badge refused";
+            default:
+                return "badge pending";
+        }
     };
 
     return (
         <div className="manage-candidatures-container">
             <Sidebar />
-            <div className="table-container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Offre</th>
-                            <th>CV</th>
-                            <th>Lettre de Motivation</th>
-                            <th>Statut</th>
-                            <th>Date de Postulation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {candidatures.map((candidature) => (
-                            <tr key={candidature._id}>
-                                <td>{candidature.id_offre ? candidature.id_offre.titre : "N/A"}</td>
-                                <td>
-                                    <a href={`http://localhost:5050/${candidature.cv}`} target="_blank" rel="noopener noreferrer">Voir CV</a>
-                                </td>
-                                <td>
-                                    <a href={`http://localhost:5050/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
-                                </td>
-                                <td>
-                                    <select 
-                                        value={candidature.statut} 
-                                        onChange={(e) => updateStatut(candidature._id, e.target.value)}
-                                    >
-                                        <option value="en cours">En cours</option>
-                                        <option value="acceptée">Acceptée</option>
-                                        <option value="refusée">Refusée</option>
-                                    </select>
-                                </td>
-                                <td>{new Date(candidature.date_postulation).toLocaleDateString()}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div className="cards-container">
+                {candidatures.map(candidature => (
+                    <div className="card-candidature" key={candidature._id}>
+                        <h3>{candidature.id_offre?.titre || "Offre non disponible"}</h3>
+                        
+                        <div className="card-links">
+                            <a href={`http://localhost:5050/${candidature.cv}`} target="_blank" rel="noopener noreferrer">Voir CV</a>
+                            <a href={`http://localhost:5050/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
+                        </div>
+
+                        <div className={getBadgeClass(candidature.statut)}>
+                            {candidature.statut}
+                        </div>
+
+                        <div className="status-section">
+                            <span className={getBadgeClass(candidature.statut)}>
+                                {candidature.statut}
+                            </span>
+                            <select 
+                                value={candidature.statut} 
+                                onChange={(e) => updateStatut(candidature._id, e.target.value)}
+                            >
+                                <option value="en cours">En cours</option>
+                                <option value="acceptée">Acceptée</option>
+                                <option value="refusée">Refusée</option>
+                            </select>
+                        </div>
+
+                        <p className="date-postulation">
+                            Postulé le : {new Date(candidature.date_postulation).toLocaleDateString()}
+                        </p>
+                    </div>
+                ))}
             </div>
         </div>
     );
