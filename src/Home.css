@@ -16,21 +16,68 @@
   padding: 0 20px;
   text-align: center;
 }
+<<<<<<< HEAD
 
+=======
+.back {
+  position: relative;
+  /* background-image: url('image.png'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Pleine hauteur de l'écran */   
+  
+ 
+}
+
+/* Superposition sombre */
+.back::before {
+  content: ""; /* Nécessaire pour le pseudo-élément */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.5); Assombrit l'image (ajuste la valeur pour plus/moins de transparence) */
+  z-index: 1; /* En arrière-plan */
+}
+
+/* Contenu placé au-dessus */
+.custom-container {
+  position: relative;
+  z-index: 2  ; /* Au-dessus de l'overlay */
+  text-align: center;
+  color: #fff; /* Texte blanc pour un meilleur contraste */
+}
+
+/* Titre principal */
+>>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
 .title {
   font-size: 2.5rem;
+<<<<<<< HEAD
   font-weight: 700;
   margin-bottom: 16px;
   color: #1a365d;
+=======
+  font-weight: bold;
+  color: white; /* Bleu */
+  text-align: center !important;
+>>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
 }
 
 .subtitle {
+<<<<<<< HEAD
   font-size: 1.1rem;
   color: #4a5568;
   margin-bottom: 40px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+=======
+  font-size: 1.5rem;
+  color: white; /* Gris Bootstrap */
+  margin-bottom: 20px;
+>>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
 }
 
 /* Search tabs */
