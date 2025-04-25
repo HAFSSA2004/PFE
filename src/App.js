@@ -12,6 +12,7 @@ import OffreDetail from './OffreDetail';
 import {  Routes, Route } from 'react-router-dom';
 import GoogleCalendar from './GoogleCalendar.js';
 import PostJob from './PostJob.jsx';
+import CandidatSpace from './CandidatSpace.js';
 //import PostJob2 from './PostJob2.js';
 //import PostJob3 from './PostJob3.js';
 //import PostJob4 from './PostJob4.js';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
         <Route path="/PostJob" element={<PostJob />} />
         <Route path="/offres/recruteur/:id" element={<MonOffre />} />
+        <Route path="/candidat-space" element={<CandidatSpace />} />
 
         
       </Routes>

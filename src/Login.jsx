@@ -26,7 +26,7 @@ function Login() {
 
         // Rediriger en fonction du rôle de l'utilisateur
         if (data.user.role === "candidat") {
-          navigate("/home"); // Redirige vers la page d'accueil
+          navigate("/"); // Redirige vers la page d'accueil
         } else if (data.user.role === "recruteur") {
           navigate("/dashboard"); // Redirige vers le dashboard
         } else {

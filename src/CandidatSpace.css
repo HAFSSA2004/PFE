@@ -1,0 +1,35 @@
+.profile-header {
+    margin-bottom: 30px;
+  }
+  
+  .profile-header .profile-image {
+    background-color: #e7f5e4;
+    padding: 20px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .card-body {
+    background-color: #f8f9fa;
+  }
+  
+  .text-primary {
+    color: #007bff;
+  }
+  
+  .loading {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.5rem;
+    color: #007bff;
+  }
+  
