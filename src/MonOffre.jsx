@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { Briefcase, Calendar } from "lucide-react";
 import "./MonOffre.css"; // import the CSS file
 
@@ -8,7 +8,7 @@ export default function MonOffre() {
   const [offres, setOffres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:5050/offres/recruteur/${id}`)
       .then((res) => {
@@ -56,7 +56,7 @@ export default function MonOffre() {
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-gray-800">{offre.titre}</h2>
-                  <p className="text-sm text-gray-500">Réf: {offre.id}</p>
+            {/**      <p className="text-sm text-gray-500">Réf: {offre.id}</p> */}
                 </div>
               </div>
 
@@ -65,9 +65,11 @@ export default function MonOffre() {
               <div className="offre-footer">
                 <div className="date">
                   <Calendar className="w-4 h-4 mr-1" />
-                  <span>{offre.date_publication}</span>
+                  <span> {new Date(offre.date_publication).toLocaleDateString()}</span>
                 </div>
-                <button className="voir-btn">Voir →</button>
+              
+                <button className="voir-btn"> Voir →</button>
+                {/* onClick={() => navigate(`/offre/${offre._id}`)}*/}
               </div>
             </div>
           ))}

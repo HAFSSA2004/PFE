@@ -52,6 +52,10 @@ function ManageCandidatures() {
             <div className="cards-container">
                 {candidatures.map(candidature => (
                     <div className="card-candidature" key={candidature._id}>
+                        <div className={getBadgeClass(candidature.statut)}>
+                            {candidature.statut}
+                        </div>
+
                         <h3>{candidature.id_offre?.titre || "Offre non disponible"}</h3>
                         
                         <div className="card-links">
@@ -59,14 +63,7 @@ function ManageCandidatures() {
                             <a href={`http://localhost:5050/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
                         </div>
 
-                        <div className={getBadgeClass(candidature.statut)}>
-                            {candidature.statut}
-                        </div>
-
                         <div className="status-section">
-                            <span className={getBadgeClass(candidature.statut)}>
-                                {candidature.statut}
-                            </span>
                             <select 
                                 value={candidature.statut} 
                                 onChange={(e) => updateStatut(candidature._id, e.target.value)}

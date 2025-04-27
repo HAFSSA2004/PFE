@@ -59,7 +59,6 @@ function Dashboard() {
         console.log("🚪 Déconnexion réussie !");
         navigate("/login"); 
     };
-
     return (
         <div className="dashboard-container">
             <aside className="sidebar">

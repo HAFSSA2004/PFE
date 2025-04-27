@@ -1,28 +1,17 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import "./Home.css";
 import Nav from "./Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-=======
-import React, { useEffect, useState } from "react";
-import './Home.css';
-import Nav from './Navbar';
-//import Annonce from './Annoce';
->>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
 
 const Home = () => {
   const [villes, setVilles] = useState([]);
   const [titres, setTitres] = useState([]);
-<<<<<<< HEAD
   const [activeTab, setActiveTab] = useState("chercher");
   const [offres, setOffres] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const navigate = useNavigate();
-=======
-  const [searchParams, setSearchParams] = useState({ titre: "", ville: "" });
->>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
 
   useEffect(() => {
     fetch("http://localhost:5050/filters")  
@@ -34,7 +23,6 @@ const Home = () => {
       .catch(error => console.error("Erreur lors du chargement des filtres:", error));
   }, []);
 
-<<<<<<< HEAD
   useEffect(() => {
     axios
       .get("http://localhost:5050/offres")
@@ -63,18 +51,6 @@ const Home = () => {
     { name: "Vente", count: "1,123", icon: "shopping-cart" },
     { name: "Santé", count: "768", icon: "heartbeat" },
   ];
-=======
-  const handleChange = (e) => {
-    setSearchParams({ ...searchParams, [e.target.name]: e.target.value });
-  };
-
-  const handleSearch = () => {
-    fetch(`http://localhost:5050/search?titre=${searchParams.titre}&ville=${searchParams.ville}`)
-      .then(response => response.json())
-      .then(results => console.log("Résultats de la recherche:", results))
-      .catch(error => console.error("Erreur lors de la recherche:", error));
-  };
->>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
 
   return (
     <div className="home-page">
@@ -83,7 +59,6 @@ const Home = () => {
       {/* Hero Section */}
       <div className="back">
         <div className="custom-container">
-<<<<<<< HEAD
           <h2 className="title">Trouvez Votre Emploi Idéal ou Recrutez les Meilleurs Talents</h2>
           <p className="subtitle">
             Des milliers d'opportunités vous attendent. Déposez votre CV ou publiez une offre en un clic.
@@ -159,47 +134,6 @@ const Home = () => {
                   {tag}
                 </div>
               ))}
-=======
-          {/* <h2 className="title">Trouvez Votre Emploi Idéal ou Recrutez les Meilleurs Talents</h2>
-          <p className="subtitle">Des milliers d'opportunités vous attendent. Déposez votre CV ou publiez une offre en un clic.</p> */}
-
-          {/* Barre de recherche */}
-          <div className="search-container">
-            <div className="search-bar">
-              <span className="icon"><i className="fas fa-search"></i></span>
-              <input 
-                type="text" 
-                name="titre" 
-                value={searchParams.titre} 
-                onChange={handleChange} 
-                placeholder="Intitulé de poste, mots-clés..."
-                list="titres"
-                className="input"
-              />
-              <datalist id="titres">
-                {titres.map((titre, index) => (
-                  <option key={index} value={titre} />
-                ))}
-              </datalist>
-
-              <span className="icon"><i className="fas fa-map-marker-alt"></i></span>
-              <input 
-                type="text" 
-                name="ville" 
-                value={searchParams.ville} 
-                onChange={handleChange} 
-                placeholder="Ville, département ..."
-                list="villes"
-                className="input"
-              />
-              <datalist id="villes">
-                {villes.map((ville, index) => (
-                  <option key={index} value={ville} />
-                ))}
-              </datalist>
-
-              <button className="search-btn" onClick={handleSearch}>Rechercher</button>
->>>>>>> 419380f47ebe45a7fbef6c4511083800e9850a58
             </div>
           </div>
         </div>
