@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Briefcase, Calendar } from "lucide-react";
-import "./MonOffre.css"; // import the CSS file
+import "./MonOffre.css";
 
 export default function MonOffre() {
   const { id } = useParams();
@@ -9,6 +9,7 @@ export default function MonOffre() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     fetch(`http://localhost:5050/offres/recruteur/${id}`)
       .then((res) => {
@@ -49,14 +50,13 @@ export default function MonOffre() {
 
         <div className="offres-grid">
           {offres.map((offre) => (
-            <div key={offre.id} className="offre-card">
+            <div key={offre._id} className="offre-card">
               <div className="offre-header">
                 <div className="icon-box">
                   <Briefcase className="w-5 h-5" />
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-gray-800">{offre.titre}</h2>
-            {/**      <p className="text-sm text-gray-500">Réf: {offre.id}</p> */}
                 </div>
               </div>
 
@@ -65,11 +65,15 @@ export default function MonOffre() {
               <div className="offre-footer">
                 <div className="date">
                   <Calendar className="w-4 h-4 mr-1" />
-                  <span> {new Date(offre.date_publication).toLocaleDateString()}</span>
+                  <span>{new Date(offre.date_publication).toLocaleDateString()}</span>
                 </div>
-              
-                <button className="voir-btn"> Voir →</button>
-                {/* onClick={() => navigate(`/offre/${offre._id}`)}*/}
+
+                <button
+                  onClick={() => navigate(`/offre/${offre._id}`)}
+                  className="voir-btn"
+                >
+                  Voir →
+                </button>
               </div>
             </div>
           ))}
