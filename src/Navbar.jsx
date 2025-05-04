@@ -49,17 +49,21 @@ const Navbar = () => {
                 <Link className="nav-link" to="/candidat-space">Espace Candidat</Link>
               </li>
             )}
+
+{user?.role === 'Admin' && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/Admin-space">Admin Candidat</Link>
+              </li>
+            )}
           </ul>
 
           <div className="d-flex align-items-center flex-nowrap">
-            {!user && (
+            {!user ? (
               <>
-                <Link to="/Login" className="btn btn-primary btnS me-2">Sign In</Link>
+                <Link to="/Login" className="btn btn-primary  me-2">Sign In</Link>
                 <Link to="/Signup" className="btn btn-outline-primary me-3">Register</Link>
               </>
-            )}
-
-            {user && (
+            ) : (
               <div className="dropdown">
                 <button
                   className="border-0 bg-transparent p-0"
@@ -76,13 +80,21 @@ const Navbar = () => {
                   />
                 </button>
 
-                <ul className="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
+                <ul className="dropdown-menu dropdown-menu-end mt-2 " style={{width:'300px'}} aria-labelledby="profileDropdown">
                   <li className="dropdown-item text-muted">Bienvenue, {user.email}</li>
 
                   {user.role === 'candidat' && (
                     <li>
                       <Link className="dropdown-item" to="/candidat-space">
                         Espace Candidat
+                      </Link>
+                    </li>
+                  )}
+
+{user.role === 'Admin' && (
+                    <li>
+                      <Link className="dropdown-item" to="/Admin-space">
+                        Admin space
                       </Link>
                     </li>
                   )}
@@ -94,6 +106,8 @@ const Navbar = () => {
                       </Link>
                     </li>
                   )}
+
+                  
 
                   <li><hr className="dropdown-divider" /></li>
 

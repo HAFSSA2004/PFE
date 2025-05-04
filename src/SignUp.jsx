@@ -42,9 +42,9 @@ function Signup() {
    <div>
     <Nav/>
      <div className="container d-flex justify-content-center align-items-center min-vh-100">
-      <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "500px" }}>
+      <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "550px" }}>
         <div className="col-md-6 d-flex flex-column justify-content-center h-100">
-          <h2 className="mb-4 fw-bold" style={{ color: "#00327D", fontFamily: "Inter" }}>
+          <h2 className="mb-4 fw-bold mt-5" style={{ color: "#00327D", fontFamily: "Inter" }}>
             Sign up now and unlock new job opportunities!
           </h2>
           <form onSubmit={handleSignup}>
@@ -73,7 +73,7 @@ function Signup() {
             <button type="submit" className="w-100" style={{ backgroundColor: "#00327D", border: "1px solid white", borderRadius: "30px", padding: "5px", color: "white", fontSize: "18px", fontWeight: "bold", fontFamily: "Inter" }}>
               Sign Up
             </button>
-            <p className="mt-3 text-center">Already have an account? <a href="/login">Sign In</a></p>
+           <p className="">Already have an account? <a href="/login">Sign In</a></p>
           </form>
         </div>
         <div className="col-md-6 d-none d-md-block h-100">

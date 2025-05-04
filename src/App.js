@@ -16,6 +16,7 @@ import CandidatSpace from './CandidatSpace.js';
 //import PostJob2 from './PostJob2.js';
 //import PostJob3 from './PostJob3.js';
 //import PostJob4 from './PostJob4.js';
+import AdminSpace from './Admin-space.js';
 import MonOffre from './MonOffre.jsx';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/PostJob" element={<PostJob />} />
         <Route path="/offres/recruteur/:id" element={<MonOffre />} />
         <Route path="/candidat-space" element={<CandidatSpace />} />
+        <Route path="/Admin-space" element={<AdminSpace />} />
 
         
       </Routes>
