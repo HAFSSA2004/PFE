@@ -81,55 +81,20 @@ function CandidatSpace() {
             <div className="card-body">
               <h5 className="card-title">Contact Information</h5>
               <ul className="list-unstyled">
+              <li> <strong>Nom:</strong> {candidat.nom}</li>
                 <li><FaEnvelope /> <strong>Email:</strong> {candidat.email}</li>
-                <li><FaPhoneAlt /> <strong>Phone:</strong> {candidat.telephone || "Non fourni"}</li>
+            
+        
               </ul>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5 className="card-title">À propos de moi</h5>
-              <p>{candidat.bio || "Aucune bio disponible"}</p>
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       {/* Skills and Experience */}
-      <div className="row mt-4">
-        <div className="col-md-6">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5 className="card-title">Compétences</h5>
-              <ul className="list-unstyled">
-                {Array.isArray(candidat.skills) && candidat.skills.length > 0 ? (
-                  candidat.skills.map((skill, index) => <li key={index}>{skill}</li>)
-                ) : (
-                  <li>Aucune compétence listée</li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5 className="card-title">Expérience</h5>
-              <ul className="list-unstyled">
-                {Array.isArray(candidat.experience) && candidat.experience.length > 0 ? (
-                  candidat.experience.map((job, index) => (
-                    <li key={index}>{job.title} chez {job.company}</li>
-                  ))
-                ) : (
-                  <li>Aucune expérience listée</li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+     
+     
 
       {/* Applications Section */}
       <div className="row mt-4">
