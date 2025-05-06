@@ -25,7 +25,7 @@ const GoogleCalendar = () => {
     useEffect(() => {
         if (recruteurId) {
             axios
-                .get(`http://localhost:5050/candidatures/confirmees/${recruteurId}`)
+                .get(`https://pfe-api-8b8e.vercel.app/candidatures/confirmees/${recruteurId}`)
                 .then(response => setCandidatures(response.data))
                 .catch(error => console.error("Erreur lors de la récupération des candidatures :", error));
         }
@@ -129,12 +129,12 @@ const GoogleCalendar = () => {
                             <tr key={_id}>
                                 <td>{id_offre?.titre || "N/A"}</td>
                                 <td>
-                                    <a href={`http://localhost:5050/${cv}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
+                                    <a href={`https://pfe-api-8b8e.vercel.app/${cv}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
                                         <i className="bi bi-file-earmark-text"></i> Voir CV
                                     </a>
                                 </td>
                                 <td>
-                                    <a href={`http://localhost:5050/${lettre_motivation}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary btn-sm">
+                                    <a href={`https://pfe-api-8b8e.vercel.app/${lettre_motivation}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary btn-sm">
                                         <i className="bi bi-file-earmark-richtext"></i> Voir Lettre
                                     </a>
                                 </td>

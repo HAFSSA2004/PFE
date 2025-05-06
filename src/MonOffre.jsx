@@ -11,7 +11,7 @@ export default function MonOffre() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5050/offres/recruteur/${id}`)
+    fetch(`https://pfe-api-8b8e.vercel.app/offres/recruteur/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Erreur de récupération des offres");
         return res.json();

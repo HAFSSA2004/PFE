@@ -17,7 +17,7 @@ function ManageCandidatures() {
 
     useEffect(() => {
         if (recruteurId) {
-            axios.get(`http://localhost:5050/candidatures/${recruteurId}`)
+            axios.get(`https://pfe-api-8b8e.vercel.app/candidatures/${recruteurId}`)
                 .then(response => {
                     setCandidatures(response.data);
                 })
@@ -26,7 +26,7 @@ function ManageCandidatures() {
     }, [recruteurId]);
 
     const updateStatut = (id, newStatut) => {
-        axios.put(`http://localhost:5050/candidatures/${id}/statut`, { statut: newStatut })
+        axios.put(`https://pfe-api-8b8e.vercel.app/candidatures/${id}/statut`, { statut: newStatut })
             .then(() => {
                 setCandidatures(prev =>
                     prev.map(c => c._id === id ? { ...c, statut: newStatut } : c)
@@ -59,8 +59,8 @@ function ManageCandidatures() {
                         <h3>{candidature.id_offre?.titre || "Offre non disponible"}</h3>
                         
                         <div className="card-links">
-                            <a href={`http://localhost:5050/${candidature.cv}`} target="_blank" rel="noopener noreferrer">Voir CV</a>
-                            <a href={`http://localhost:5050/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
+                            <a href={`https://pfe-api-8b8e.vercel.app/${candidature.cv}`} target="_blank" rel="noopener noreferrer">Voir CV</a>
+                            <a href={`https://pfe-api-8b8e.vercel.app/${candidature.lettre_motivation}`} target="_blank" rel="noopener noreferrer">Voir Lettre</a>
                         </div>
 
                         <div className="status-section">

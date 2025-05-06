@@ -14,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5050/filters")  
+    fetch("https://pfe-api-8b8e.vercel.app/filters")  
       .then(response => response.json())
       .then(data => {
         setVilles(data.villes);
@@ -25,14 +25,14 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5050/offres")
+      .get("https://pfe-api-8b8e.vercel.app/offres")
       .then((response) => setOffres(response.data))
       .catch((error) => console.error("Erreur lors de la récupération des offres :", error));
   }, []);
 
   const handleSearch = () => {
     axios
-      .get("http://localhost:5050/offres", {
+      .get("https://pfe-api-8b8e.vercel.app/offres", {
         params: {
           titre: searchTitle,
           lieu: searchLocation,

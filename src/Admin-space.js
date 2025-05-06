@@ -30,7 +30,7 @@ function AdminSpace() {
   const fetchUsers = async () => {
     setDataLoading((prev) => ({ ...prev, users: true }))
     try {
-      const response = await fetch("http://localhost:5050/users")
+      const response = await fetch("https://pfe-api-8b8e.vercel.app/users")
       if (!response.ok) {
         throw new Error("Failed to fetch users")
       }
@@ -48,7 +48,7 @@ function AdminSpace() {
   const fetchOffers = async () => {
     setDataLoading((prev) => ({ ...prev, offers: true }))
     try {
-      const response = await fetch("http://localhost:5050/offres")
+      const response = await fetch("https://pfe-api-8b8e.vercel.app/offres")
       if (!response.ok) {
         throw new Error("Failed to fetch offers")
       }
@@ -85,9 +85,9 @@ function AdminSpace() {
     try {
       let endpoint = ""
       if (type === "offer") {
-        endpoint = `http://localhost:5050/offres/${id}`
+        endpoint = `https://pfe-api-8b8e.vercel.app/offres/${id}`
       } else if (type === "user") {
-        endpoint = `http://localhost:5050/users/${id}`
+        endpoint = `https://pfe-api-8b8e.vercel.app/${id}`
       }
 
       const response = await fetch(endpoint, {
