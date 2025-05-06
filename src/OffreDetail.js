@@ -56,7 +56,7 @@ function OffreDetail() {
 
       const token = localStorage.getItem("token"); // Récupération du token
 
-      const response = await axios.post("http://localhost:5050/candidature", formData, {
+      const response = await axios.post("https://pfe-api-8b8e.vercel.app/candidature", formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Ajout du token dans les headers
         },
