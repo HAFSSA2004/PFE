@@ -1,77 +1,81 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import axios from "axios"
-import "./OffreDetail.css"
+import { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import "./OffreDetail.css";
 
 function OffreDetail() {
-  const { id } = useParams() // Récupération de l'ID depuis l'URL
-  const [offre, setOffre] = useState(null)
-  const [cv, setCv] = useState(null)
-  const [lettre, setLettre] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(null)
+  const { id } = useParams();
+  const [offre, setOffre] = useState(null);
+  const [cv, setCv] = useState(null);
+  const [lettre, setLettre] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  // Références pour les inputs de fichiers
+  const cvInputRef = useRef(null);
+  const lettreInputRef = useRef(null);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     axios
       .get(`http://localhost:5050/offre/${id}`)
       .then((response) => {
-        setOffre(response.data)
-        setError(null)
+        setOffre(response.data);
+        setError(null);
       })
       .catch((error) => {
-        console.error("Erreur lors de la récupération de l'offre :", error)
-        setError("Impossible de charger les détails de l'offre. Veuillez réessayer plus tard.")
+        console.error("Erreur lors de la récupération de l'offre :", error);
+        setError("Impossible de charger les détails de l'offre. Veuillez réessayer plus tard.");
       })
       .finally(() => {
-        setLoading(false)
-      })
-  }, [id])
+        setLoading(false);
+      });
+  }, [id]);
 
   const handleFileChange = (event, setFile) => {
-    setFile(event.target.files[0])
-  }
+    setFile(event.target.files[0]);
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!cv || !lettre) {
-      setError("Veuillez sélectionner un CV et une lettre de motivation.")
-      return
+      setError("Veuillez sélectionner un CV et une lettre de motivation.");
+      return;
     }
 
-    const formData = new FormData()
-    formData.append("id_offre", id)
-    formData.append("cv", cv)
-    formData.append("lettre_motivation", lettre)
+    const formData = new FormData();
+    formData.append("id_offre", id);
+    formData.append("cv", cv);
+    formData.append("lettre_motivation", lettre);
 
     try {
-      setSubmitting(true)
-      setError(null)
+      setSubmitting(true);
+      setError(null);
 
-      const response = await axios.post("http://localhost:5050/candidature", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
+      const token = localStorage.getItem("token"); // Récupération du token
 
-      setSuccess(response.data.message || "Votre candidature a été envoyée avec succès !")
-      setCv(null)
-      setLettre(null)
+      const response = await axios.post("https://pfe-api-8b8e.vercel.app/candidature", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajout du token dans les headers
+        },
+      });
 
-      // Reset file inputs
-      const fileInputs = document.querySelectorAll('input[type="file"]')
-      fileInputs.forEach((input) => {
-        input.value = ""
-      })
+      setSuccess(response.data.message || "Votre candidature a été envoyée avec succès !");
+      setCv(null);
+      setLettre(null);
+
+      // Réinitialiser les inputs fichier
+      if (cvInputRef.current) cvInputRef.current.value = "";
+      if (lettreInputRef.current) lettreInputRef.current.value = "";
     } catch (error) {
-      console.error("Erreur lors de l'envoi de la candidature :", error)
-      setError(error.response?.data?.message || "Erreur lors de l'envoi de la candidature. Veuillez réessayer.")
+      console.error("Erreur lors de l'envoi de la candidature :", error);
+      setError(error.response?.data?.message || "Erreur lors de l'envoi de la candidature. Veuillez réessayer.");
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -84,7 +88,7 @@ function OffreDetail() {
           <div className="skeleton-line"></div>
         </div>
       </div>
-    )
+    );
   }
 
   if (error && !offre) {
@@ -95,7 +99,7 @@ function OffreDetail() {
           <p>{error}</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -110,26 +114,15 @@ function OffreDetail() {
           <div className="offre-meta">
             <div className="meta-item">
               <span className="meta-icon">🏢</span>
-              <p>
-                <strong>Entreprise :</strong> {offre.entreprise}
-              </p>
+              <p><strong>Entreprise :</strong> {offre.entreprise}</p>
             </div>
             <div className="meta-item">
               <span className="meta-icon">📍</span>
-              <p>
-                <strong>Lieu :</strong> {offre.lieu}
-              </p>
+              <p><strong>Lieu :</strong> {offre.lieu}</p>
             </div>
             <div className="meta-item">
               <span className="meta-icon">📅</span>
-              <p>
-                <strong>Date de publication :</strong>{" "}
-                {new Date(offre.date_publication).toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
+              <p><strong>Date de publication :</strong> {new Date(offre.date_publication).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</p>
             </div>
           </div>
 
@@ -157,9 +150,7 @@ function OffreDetail() {
 
             <form onSubmit={handleSubmit} className="candidature-form">
               <div className="form-group">
-                <label htmlFor="cv">
-                  CV <span className="required">*</span>
-                </label>
+                <label htmlFor="cv">CV <span className="required">*</span></label>
                 <div className="file-input-container">
                   <input
                     id="cv"
@@ -167,15 +158,14 @@ function OffreDetail() {
                     onChange={(e) => handleFileChange(e, setCv)}
                     required
                     accept=".pdf,.doc,.docx"
+                    ref={cvInputRef}
                   />
                   <div className="file-input-help">{cv ? cv.name : "Sélectionner votre CV (PDF, DOC, DOCX)"}</div>
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="lettre">
-                  Lettre de motivation <span className="required">*</span>
-                </label>
+                <label htmlFor="lettre">Lettre de motivation <span className="required">*</span></label>
                 <div className="file-input-container">
                   <input
                     id="lettre"
@@ -183,6 +173,7 @@ function OffreDetail() {
                     onChange={(e) => handleFileChange(e, setLettre)}
                     required
                     accept=".pdf,.doc,.docx"
+                    ref={lettreInputRef}
                   />
                   <div className="file-input-help">
                     {lettre ? lettre.name : "Sélectionner votre lettre de motivation (PDF, DOC, DOCX)"}
@@ -195,13 +186,12 @@ function OffreDetail() {
               </button>
             </form>
           </div>
-
         </>
       ) : (
         <p>Chargement de l'offre...</p>
       )}
     </div>
-  )
+  );
 }
 
-export default OffreDetail
+export default OffreDetail;
