@@ -28,10 +28,10 @@ body {
 
 /* Container */
 .dashboard-container {
-  max-width: 1200px;
+  width: 1200px;
+  height: 100%;
   margin: 0 auto;
   padding: 2rem;
-  display: flex;
   flex-direction: column;
   gap: 2rem;
 }
@@ -93,14 +93,6 @@ body {
   background-color: var(--primary-dark);
   transform: translateY(-1px);
 }
-
-/* Header */
-.dashboard-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .profile-section {
   display: flex;
   align-items: center;
@@ -146,23 +138,36 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Main Content */
 .dashboard-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping of items */
+  gap: 2rem; /* Space between cards */
 }
 
-/* Cards */
 .dashboard-card {
+  width: calc(25% - 2rem); /* Four cards per row with gap adjustment */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
   background: white;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* Responsive fix for smaller screens */
+@media (max-width: 768px) {
+  .dashboard-card {
+    width: calc(50% - 2rem); /* Two cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-card {
+    width: 100%; /* One card per row on very small screens */
+  }
+}
+
 
 .dashboard-card:hover {
   transform: translateY(-3px);

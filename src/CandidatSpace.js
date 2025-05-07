@@ -27,7 +27,7 @@ function CandidatSpace() {
           throw new Error("Token d'authentification manquant")
         }
 
-        const response = await fetch("http://localhost:5050/me", {
+        const response = await fetch("https://pfe-api-8b8e.vercel.app/me", {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
@@ -51,8 +51,7 @@ function CandidatSpace() {
         if (!token) {
           throw new Error("Token d'authentification manquant")
         }
-
-        const response = await fetch("http://localhost:5050/mes-candidatures", {
+        const response = await fetch("https://pfe-api-8b8e.vercel.app/mes-candidatures", {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
@@ -131,7 +130,8 @@ function CandidatSpace() {
   }
 
   return (
-    <div className="dashboard-container">
+    <div>
+      <div className="dashboard-container">
       <div className="dashboard-header">
         <div className="profile-section">
           <div className="profile-avatar">
@@ -149,53 +149,50 @@ function CandidatSpace() {
           </div>
         </div>
       </div>
-
+      <h1>Mes Candidature</h1>
       <div className="dashboard-content">
-       
-        <div className="dashboard-card applications-card">
-          <div className="card-header">
-            <h2>
-              <FaBriefcase /> Suivi de Candidatures
-            </h2>
-          </div>
-          <div className="card-body">
-            {applications.length === 0 ? (
-              <div className="empty-state">
-                <p>Vous n'avez pas encore de candidatures.</p>
+       {applications.length === 0 ? (
+  <div className="dashboard-card applications-card">
+    <div className="card-body">
+      <p>Vous n'avez pas encore de candidatures.</p>
+    </div>
+  </div>
+) : (
+  applications.map((application, index) => {
+    const statusInfo = getStatusInfo(application.statut)
+    return (
+      <div className="dashboard-card applications-card" key={index}>
+        <div className="card-header">
+          <h2>
+            <FaBriefcase /> {application.id_offre?.titre || "Poste non spécifié"}
+          </h2>
+        </div>
+        <div className="card-body">
+          <div className="application-item">
+            <div className="application-header">
+              <div className="company-name">
+                <FaBuilding /> {application.id_offre?.entreprise || "Entreprise non spécifiée"}
               </div>
-            ) : (
-              <div className="applications-list">
-                {applications.map((application, index) => {
-                  const statusInfo = getStatusInfo(application.statut)
-                  return (
-                    <div className="application-item" key={index}>
-                      <div className="application-header">
-                        <div className="application-title">
-                          <h3>{application.id_offre?.titre || "Poste non spécifié"}</h3>
-                          <div className="company-name">
-                            <FaBuilding /> {application.id_offre?.entreprise || "Entreprise non spécifiée"}
-                          </div>
-                        </div>
-                        <div className={`application-status ${statusInfo.class}`}>
-                          {statusInfo.icon} {statusInfo.text}
-                        </div>
-                      </div>
-                      <div className="application-details">
-                        <div className="application-date">
-                          <FaCalendarAlt /> Postulé le {formatDate(application.date_postulation)}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
+              <div className={`application-status ${statusInfo.class}`}>
+                {statusInfo.icon} {statusInfo.text}
               </div>
-            )}
+            </div>
+            <div className="application-details">
+              <div className="application-date">
+                <FaCalendarAlt /> Postulé le {formatDate(application.date_postulation)}
+              </div>
+            </div>
           </div>
         </div>
-
-
-        <div className="dashboard-card applications-card">
-  <div className="card-header">
+      </div>
+    )
+  })
+)}
+       </div>
+      </div>
+   
+       {/*****<div className="dashboard-card applications-card">
+          <div className="card-header">
     <h2>
       <FaBriefcase /> Informations personnelles
     </h2>
@@ -215,11 +212,9 @@ function CandidatSpace() {
         </p>
       </div>
     </div>
-  </div>
-</div>
-
-      </div>
+  </div> */}
     </div>
+ 
   )
 }
 

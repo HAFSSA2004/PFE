@@ -20,7 +20,7 @@ function OffreDetail() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5050/offre/${id}`)
+      .get(`https://pfe-api-8b8e.vercel.app/offre/${id}`)
       .then((response) => {
         setOffre(response.data);
         setError(null);
