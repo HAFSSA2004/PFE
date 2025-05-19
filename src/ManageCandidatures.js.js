@@ -18,6 +18,7 @@ function ManageCandidatures() {
     useEffect(() => {
         if (recruteurId) {
             axios.get(`https://pfe-api-8b8e.vercel.app/candidatures/${recruteurId}`)
+            
                 .then(response => {
                     setCandidatures(response.data);
                 })

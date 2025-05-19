@@ -7,7 +7,7 @@ import Nav from './Navbar';
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Hook pour la redirection hi 
+  const navigate = useNavigate(); // Hook pour la redirection
 
   const handleLogin = async (e) => {
     e.preventDefault();
