@@ -23,12 +23,15 @@ const Home = () => {
       .catch(error => console.error("Erreur lors du chargement des filtres:", error));
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("https://pfe-api-8b8e.vercel.app/offres")
-      .then((response) => setOffres(response.data))
-      .catch((error) => console.error("Erreur lors de la récupération des offres :", error));
-  }, []);
+ useEffect(() => {
+  axios
+    .get("https://pfe-api-8b8e.vercel.app/offres")
+    .then((response) => setOffres(response.data))
+    .catch((error) => {
+      console.error("Erreur lors de la récupération des offres :", error.response ? error.response.data : error.message);
+    });
+}, []);
+
 
   const handleSearch = () => {
     axios
