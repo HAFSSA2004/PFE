@@ -63,8 +63,9 @@ function Dashboard() {
         <div className="manage-candidatures-container">
         <Sidebar />
         <div className="cards-container">
-         <div className="dashboard-content">
+        <main className="dashboard-content">
                         <h1>Tableau de Bord</h1>
+        
                         <div className="dashboard-widgets">
                             {loading ? (
                                 <p>Chargement des statistiques...</p>
@@ -85,7 +86,7 @@ function Dashboard() {
                                 </>
                             )}
                         </div>
-</div>
+                    </main>
         </div>
         </div>
     );
