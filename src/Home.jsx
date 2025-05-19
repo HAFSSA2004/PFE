@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import Nav from "./Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-//hadd 
+import { useNavigate,Link } from "react-router-dom";
+
 const Home = () => {
   const [villes, setVilles] = useState([]);
   const [titres, setTitres] = useState([]);
@@ -14,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://pfe-api-8b8e.vercel.app/filters")  
+    fetch("http://localhost:5050/filters")  
       .then(response => response.json())
       .then(data => {
         setVilles(data.villes);
@@ -26,7 +26,6 @@ const Home = () => {
   useEffect(() => {
     axios
       .get("https://pfe-api-8b8e.vercel.app/offres")
-      
       .then((response) => setOffres(response.data))
       .catch((error) => console.error("Erreur lors de la récupération des offres :", error));
   }, []);
@@ -121,7 +120,7 @@ const Home = () => {
               <div className="recruiter-content">
                 <h3>Publiez votre offre d'emploi</h3>
                 <p>Accédez à notre base de talents qualifiés et trouvez le candidat idéal pour votre entreprise.</p>
-                <button className="publish-btn">Publier une offre</button>
+                <button className="publish-btn"><Link to='/PostJob' className="text-white" style={{textDecoration:'none'}}>Publier une offre</Link></button>
               </div>
             </div>
           )}
