@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 import './ManageCandidature.css';
-
+//commntaire
 function ManageCandidatures() {
     const [candidatures, setCandidatures] = useState([]);
     const [recruteurId, setRecruteurId] = useState(null);
