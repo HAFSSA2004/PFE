@@ -13,7 +13,7 @@ export default function Footer() {
                 />
                 <path fill="currentColor" d="M13 10h-2v3H8v2h3v3h2v-3h3v-2h-3z" />
               </svg>
-              <h3>RecrutPro</h3>
+              <h3>HireBridge</h3>
             </div>
             <p>Votre solution pour l'emploi et le recrutement.</p>
             <div className="language-selector">

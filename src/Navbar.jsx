@@ -3,15 +3,13 @@ import { Link } from 'react-router-dom';
 import './Nav.css';
 
 const Navbar = () => {
-  // Lire l'utilisateur connecté
   const user = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <div className="container-fluid">
-        <Link className="navbar-brand fw-bold d-flex align-items-center" to="/">
-          <img src="/RH.png" alt="Logo" className="me-2" style={{ height: '40px' }} />
-          RecrutPro
+        <Link className="navbar-brand d-flex align-items-center fw-bold" to="/">
+        <img src="/L2.png" alt="Logo" className="me-2 navbar-logo"  />
         </Link>
 
         <button
@@ -26,19 +24,20 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse flex-nowrap" id="navbarNav">
+        <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+              <Link className="nav-link" to="/contact">Home </Link>
+            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">About Us</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <Link className="nav-link" to="/contact">Contact Us</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/jobs">Jobs</Link>
-            </li>
+            
+           
 
-            {/* Affichage conditionnel selon le rôle */}
             {user?.role === 'recruteur' && (
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">Dashboard</Link>
@@ -49,68 +48,48 @@ const Navbar = () => {
                 <Link className="nav-link" to="/candidat-space">Espace Candidat</Link>
               </li>
             )}
-
-{user?.role === 'Admin' && (
+            {user?.role === 'Admin' && (
               <li className="nav-item">
-                <Link className="nav-link" to="/Admin-space">Admin Candidat</Link>
+                <Link className="nav-link" to="/Admin-space">Admin Panel</Link>
               </li>
             )}
           </ul>
 
-          <div className="d-flex align-items-center flex-nowrap">
+          <div className="d-flex align-items-center">
             {!user ? (
               <>
-                <Link to="/Login" className="btn btn-primary  me-2">Sign In</Link>
+                <Link to="/Login" className="btnL">Sign In</Link>
                 <Link to="/Signup" className="btn btn-outline-primary me-3">Register</Link>
               </>
             ) : (
               <div className="dropdown">
                 <button
-                  className="border-0 bg-transparent p-0"
+                  className="btn bg-transparent border-0 p-0"
                   id="profileDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  aria-label="Ouvrir le menu profil"
                 >
                   <img
                     src="/images.png"
-                    alt="profil"
+                    alt="Profile"
                     className="rounded-circle"
-                    style={{ width: '40px', height: '40px', objectFit: 'cover', cursor: 'pointer' }}
+                    style={{ width: '40px', height: '40px', objectFit: 'cover',marginTop:'-20px' }}
                   />
                 </button>
-
-                <ul className="dropdown-menu dropdown-menu-end mt-2 " style={{width:'300px'}} aria-labelledby="profileDropdown">
-                  <li className="dropdown-item text-muted">Bienvenue, {user.email}</li>
+                <ul className="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown" style={{ width: '320px' }}>
+                  <li className="dropdown-item text-muted">Welcome, {user.email}</li>
 
                   {user.role === 'candidat' && (
-                    <li>
-                      <Link className="dropdown-item" to="/candidat-space">
-                        Espace Candidat
-                      </Link>
-                    </li>
+                    <li><Link className="dropdown-item" to="/candidat-space">Espace Candidat</Link></li>
                   )}
-
-{user.role === 'Admin' && (
-                    <li>
-                      <Link className="dropdown-item" to="/Admin-space">
-                        Admin space
-                      </Link>
-                    </li>
-                  )}
-
                   {user.role === 'recruteur' && (
-                    <li>
-                      <Link className="dropdown-item" to="/dashboard">
-                        Dashboard Recruteur
-                      </Link>
-                    </li>
+                    <li><Link className="dropdown-item" to="/dashboard">Dashboard Recruteur</Link></li>
                   )}
-
-                  
+                  {user.role === 'Admin' && (
+                    <li><Link className="dropdown-item" to="/Admin-space">Admin Panel</Link></li>
+                  )}
 
                   <li><hr className="dropdown-divider" /></li>
-
                   <li>
                     <button
                       className="dropdown-item text-danger"
@@ -127,10 +106,13 @@ const Navbar = () => {
               </div>
             )}
 
-            <div className="vr mx-2"></div>
+            <div className="vr mx-3 d-none d-lg-block"></div>
 
-            <Link to="/PostJob" className="ms-2 text-decoration-none text-muted text-nowrap">
-              Entreprises/Publier Une Offre D'Emploi
+            <Link
+              to="/PostJob"
+              className="text-decoration-none text-muted fw-semibold text-nowrap"
+            >
+              Entreprises / Publier une offre
             </Link>
           </div>
         </div>

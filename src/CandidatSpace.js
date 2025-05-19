@@ -27,7 +27,7 @@ function CandidatSpace() {
           throw new Error("Token d'authentification manquant")
         }
 
-        const response = await fetch("https://pfe-api-8b8e.vercel.app/me", {
+        const response = await fetch("http://localhost:5050/me", {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function CandidatSpace() {
         if (!token) {
           throw new Error("Token d'authentification manquant")
         }
-        const response = await fetch("https://pfe-api-8b8e.vercel.app/mes-candidatures", {
+        const response = await fetch("http://localhost:5050/mes-candidatures", {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
