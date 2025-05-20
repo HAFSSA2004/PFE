@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Post.css";
-
+import Navbar from "./Navbar";
 const PostJob = () => {
   const [formData, setFormData] = useState({
     titre: "",
@@ -47,7 +47,10 @@ const PostJob = () => {
   };
 
   return (
+    <div>
+       <Navbar/>
     <div className="container mt-5">
+     
       <div className="card shadow-lg p-5 form-container">
         <div className="form-header text-center mb-4">
           <img
@@ -138,6 +141,7 @@ const PostJob = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

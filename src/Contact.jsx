@@ -1,12 +1,40 @@
 import './contact.css';
+import { Link } from 'react-router-dom';
 
 export default function ContactPage() {
   return (
     <div className="contact-page">
+      {/* Back to Home Button */}
+      <div className="fixed top-6 left-6 z-50">
+        <Link
+          to="/"
+          className="flex items-center gap-2  px-4 py-2 rounded-full contact-hero "
+          title="Back to Home"
+          style={{ textDecoration: 'none'}}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-5 w-5"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span className="text-sm font-medium">Home</span>
+        </Link>
+      </div>
+
+      {/* Hero Section */}
       <div className="contact-hero">
         <div className="contact-hero-content">
           <h1>Contact Us</h1>
-          <p>We're here to help with your recruitment and job search needs</p>
+          <p className='text-white'>We're here to help with your recruitment and job search needs</p>
         </div>
       </div>
 
@@ -15,8 +43,7 @@ export default function ContactPage() {
           <div className="contact-info">
             <h2>Get in Touch</h2>
             <p>
-              Have questions about our services or need assistance? Our team is ready to help you find the right
-              recruitment solution for your business or career.
+              Have questions about our services or need assistance? Our team is ready to help you find the right recruitment solution for your business or career.
             </p>
 
             <div className="contact-methods">
@@ -33,7 +60,7 @@ export default function ContactPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 }
               />
@@ -51,8 +78,8 @@ export default function ContactPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
                   </svg>
                 }
               />
@@ -70,8 +97,8 @@ export default function ContactPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
                   </svg>
                 }
               />
@@ -116,9 +143,7 @@ export default function ContactPage() {
                   I agree to the <a href="/privacy-policy">privacy policy</a> and consent to having my data processed
                 </label>
               </div>
-              <button type="submit" className="submit-button">
-                Send Message
-              </button>
+              <button type="submit" className="submit-button">Send Message</button>
             </form>
           </div>
 
@@ -135,6 +160,7 @@ export default function ContactPage() {
   );
 }
 
+// Other component definitions (unchanged, except for minor label tweaks)
 function ContactMethod({ title, content, description, icon }) {
   return (
     <div className="contact-method">
@@ -151,7 +177,7 @@ function ContactMethod({ title, content, description, icon }) {
 function SocialIcon({ platform, link }) {
   return (
     <a href={link} aria-label={platform}>
-      <svg viewBox="0 0 320 512" className="social-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="social-icon">
         <path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
       </svg>
     </a>
@@ -172,7 +198,7 @@ function FormInput({ label, name, type, required }) {
   return (
     <div className="form-group">
       <label htmlFor={name}>
-        {label} <span className="required">{required}</span>
+        {label} {required && <span className="required">*</span>}
       </label>
       <input type={type} id={name} name={name} required={required} />
     </div>
@@ -183,13 +209,11 @@ function FormSelect({ label, name, options, required }) {
   return (
     <div className="form-group">
       <label htmlFor={name}>
-        {label} <span className="required">{required }</span>
+        {label} {required && <span className="required">*</span>}
       </label>
       <select id={name} name={name} required={required}>
         {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
+          <option key={index} value={option}>{option}</option>
         ))}
       </select>
     </div>
@@ -200,7 +224,7 @@ function FormTextarea({ label, name, required }) {
   return (
     <div className="form-group">
       <label htmlFor={name}>
-        {label} <span className="required">{required}</span>
+        {label} {required && <span className="required">*</span>}
       </label>
       <textarea id={name} name={name} required={required}></textarea>
     </div>

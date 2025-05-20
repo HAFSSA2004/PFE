@@ -10,6 +10,7 @@ import {
   FaUserTie,
   FaUserGraduate,
   FaSpinner,
+  FaInfoCircle
 } from "react-icons/fa"
 import "./Admin.css"
 
@@ -21,11 +22,30 @@ function AdminSpace() {
   const [loading, setLoading] = useState(false)
   const [notification, setNotification] = useState({ show: false, message: "", type: "" })
   const [dataLoading, setDataLoading] = useState({ users: true, offers: true })
+const [adminInfo, setAdminInfo] = useState(null)
 
   useEffect(() => {
     fetchUsers()
     fetchOffers()
   }, [])
+useEffect(() => {
+  fetchAdminInfo()
+  fetchUsers()
+  fetchOffers()
+}, [])
+
+const fetchAdminInfo = async () => {
+  try {
+    const response = await fetch("https://pfe-api-8b8e.vercel.app/admin")
+    if (!response.ok) {
+      throw new Error("Failed to fetch admin info")
+    }
+    const data = await response.json()
+    setAdminInfo(data)
+  } catch (error) {
+    console.error("Error fetching admin info:", error)
+  }
+}
 
   const fetchUsers = async () => {
     setDataLoading((prev) => ({ ...prev, users: true }))
@@ -87,7 +107,7 @@ function AdminSpace() {
       if (type === "offer") {
         endpoint = `https://pfe-api-8b8e.vercel.app/offres/${id}`
       } else if (type === "user") {
-        endpoint = `https://pfe-api-8b8e.vercel.app/${id}`
+        endpoint = `https://pfe-api-8b8e.vercel.app/users/${id}`
       }
 
       const response = await fetch(endpoint, {
@@ -140,8 +160,9 @@ function AdminSpace() {
           <FaUserCircle size={80} className="admin-icon" />
         </div>
         <div className="admin-title">
-          <h2>Admin Dashboard</h2>
-          <p className="admin-subtitle">Manage users and job offers</p>
+          <h2>Espace Administrateur</h2>
+          
+          <p className="admin-subtitle">Gérez les utilisateurs et les offres d'emploi</p>
         </div>
       </div>
 
@@ -149,33 +170,60 @@ function AdminSpace() {
       <div className="admin-tabs">
         <button className={`admin-tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>
           <FaUsers className="tab-icon" size={20} />
-          <span>All Users</span>
+          <span>Tous les utilisateurs</span>
         </button>
         <button
           className={`admin-tab ${activeTab === "recruiters" ? "active" : ""}`}
           onClick={() => setActiveTab("recruiters")}
         >
           <FaUserTie className="tab-icon" size={20} />
-          <span>Recruiters</span>
+          <span>Recruteurs</span>
         </button>
         <button
           className={`admin-tab ${activeTab === "candidates" ? "active" : ""}`}
           onClick={() => setActiveTab("candidates")}
         >
           <FaUserGraduate className="tab-icon" size={20} />
-          <span>Candidates</span>
+          <span>Candidats</span>
         </button>
         <button
           className={`admin-tab ${activeTab === "offers" ? "active" : ""}`}
           onClick={() => setActiveTab("offers")}
         >
           <FaBriefcase className="tab-icon" size={20} />
-          <span>Job Offers</span>
+          <span>Offres d'emploi</span>
+        </button>
+
+
+        <button
+          className={`admin-tab ${activeTab === "info" ? "active" : ""}`}
+          onClick={() => setActiveTab("info")}
+        >
+          <FaInfoCircle className="tab-icon" size={20} />
+          <span>Infos  Admin </span>
         </button>
       </div>
 
       {/* Content Area */}
       <div className="admin-content">
+        {/* Admin Info Section */}
+{activeTab === "info" && (
+  <div className="admin-info-section">
+    <h3>Informations Administrateur</h3>
+    {adminInfo ? (
+      <div className="admin-info-details">
+         <p><strong>Nom :</strong> {adminInfo.nom}</p>
+        <p><strong>Prénom :</strong> {adminInfo.prenom}</p>
+        <p><strong>Email :</strong> {adminInfo.email}</p>
+        <p><strong>Téléphone :</strong> {adminInfo.phone}</p>
+        {/* Add other admin fields you want to show */}
+      </div>
+    ) : (
+      <p>Loading admin information...</p>
+    )}
+  </div>
+)}
+
         {/* Users List */}
         {(activeTab === "all" || activeTab === "recruiters" || activeTab === "candidates") && (
           <div className="section-header">
@@ -214,9 +262,7 @@ function AdminSpace() {
                     {isRecruiter(user) && user.entreprise && <p className="user-company">{user.entreprise}</p>}
                   </div>
                   <div className="user-card-actions">
-                    <button className="action-button edit-button" title="Edit User">
-                      <FaEdit size={18} />
-                    </button>
+                    
                     <button
                       className="action-button delete-button"
                       title="Delete User"
@@ -260,9 +306,7 @@ function AdminSpace() {
                       <div className="offer-card-header">
                         <h4>{offer.titre}</h4>
                         <div className="offer-actions">
-                          <button className="action-button edit-button" title="Edit Offer">
-                            <FaEdit size={18} />
-                          </button>
+                          
                           <button
                             className="action-button delete-button"
                             title="Delete Offer"
