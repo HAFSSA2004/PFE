@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Post.css";
 import Navbar from "./Navbar";
+
 const PostJob = () => {
   const [formData, setFormData] = useState({
     titre: "",
@@ -14,13 +15,23 @@ const PostJob = () => {
 
   const navigate = useNavigate();
 
+  // ✅ Vérification accès recruteur uniquement
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || user.role !== "recruteur") {
+      alert("Accès réservé aux recruteurs !");
+      navigate("/"); // ou vers "/login"
+    }
+  }, [navigate]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async () => {
-    const idRecruteur = localStorage.getItem("userId");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const idRecruteur = user?._id;
     if (!idRecruteur) {
       alert("Erreur : recruteur non identifié !");
       return;

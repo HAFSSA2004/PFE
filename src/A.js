@@ -1,354 +1,210 @@
-"use client"
+import React, { useEffect, useState } from "react";
+import { gapi } from "gapi-script";
+import axios from "axios";
+import './GoogleCalendar.css';
 
-import { useEffect, useState } from "react"
-import {
-  FaUserCircle,
-  FaTrash,
-  FaEdit,
-  FaUsers,
-  FaBriefcase,
-  FaUserTie,
-  FaUserGraduate,
-  FaSpinner,
-  FaInfoCircle
-} from "react-icons/fa"
-import "./Admin.css"
+const CLIENT_ID = "508571841606-vht7f4v6d0qg5bedfhct1k1krmsfmr7l.apps.googleusercontent.com";
+const API_KEY = "AIzaSyB7XugS7slIAgcHijhwRnVu-ln47EhU1OM";
+const SCOPES = "https://www.googleapis.com/auth/calendar.events";
+const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
-function AdminSpace() {
-  const [users, setUsers] = useState([])
-  const [offers, setOffers] = useState([])
-  const [activeTab, setActiveTab] = useState("all") // all, recruiters, candidates, offers, admin
-  const [deleteConfirm, setDeleteConfirm] = useState({ show: false, type: "", id: "" })
-  const [loading, setLoading] = useState(false)
-  const [notification, setNotification] = useState({ show: false, message: "", type: "" })
-  const [dataLoading, setDataLoading] = useState({ users: true, offers: true, admin: true })
-  const [adminInfo, setAdminInfo] = useState(null)
+const GoogleCalendar = () => {
+  const [signedIn, setSignedIn] = useState(false);
+  const [candidatures, setCandidatures] = useState([]);
+  const [recruteurId, setRecruteurId] = useState(null);
+  const [emailCandidat, setEmailCandidat] = useState("");
+  const [dateEntretien, setDateEntretien] = useState("");
+  const [duree, setDuree] = useState(30); // durée en minutes par défaut
+  const [lieu, setLieu] = useState("Google Meet");
 
   useEffect(() => {
-    fetchAdminInfo()
-    fetchUsers()
-    fetchOffers()
-  }, [])
-
-  // Fetch Admin info
-  const fetchAdminInfo = async () => {
-    setDataLoading(prev => ({ ...prev, admin: true }))
-    try {
-      const response = await fetch("http://localhost:5050/admin")
-      if (!response.ok) throw new Error("Failed to fetch admin info")
-      const data = await response.json()
-      setAdminInfo(data)
-    } catch (error) {
-      console.error("Error fetching admin info:", error)
-      showNotification("Failed to load admin info", "error")
-    } finally {
-      setDataLoading(prev => ({ ...prev, admin: false }))
+    const token = localStorage.getItem("token");
+    if (token) {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setRecruteurId(payload.id);
     }
-  }
+  }, []);
 
-  // Fetch users (recruiters + candidates)
-  const fetchUsers = async () => {
-    setDataLoading(prev => ({ ...prev, users: true }))
-    try {
-      const response = await fetch("http://localhost:5050/users")
-      if (!response.ok) throw new Error("Failed to fetch users")
-      const data = await response.json()
-      const allUsers = [...data.recruteurs, ...data.candidats]
-      setUsers(allUsers)
-    } catch (error) {
-      console.error("Error fetching users:", error)
-      showNotification("Failed to load users", "error")
-    } finally {
-      setDataLoading(prev => ({ ...prev, users: false }))
+  useEffect(() => {
+    if (recruteurId) {
+      axios
+        .get(`http://localhost:5050/candidatures/confirmees/${recruteurId}`)
+        .then(response => setCandidatures(response.data))
+        .catch(error => console.error("Erreur lors de la récupération des candidatures :", error));
     }
-  }
+  }, [recruteurId]);
 
-  // Fetch offers
-  const fetchOffers = async () => {
-    setDataLoading(prev => ({ ...prev, offers: true }))
-    try {
-      const response = await fetch("http://localhost:5050/offres")
-      if (!response.ok) throw new Error("Failed to fetch offers")
-      const data = await response.json()
-      setOffers(data)
-    } catch (error) {
-      console.error("Error fetching offers:", error)
-      showNotification("Failed to load job offers", "error")
-    } finally {
-      setDataLoading(prev => ({ ...prev, offers: false }))
-    }
-  }
-
-  const getRecruiterName = (recruteurId) => {
-    const recruiter = users.find(user => user._id === recruteurId)
-    return recruiter ? `${recruiter.nom} ${recruiter.prenom}` : "Unknown Recruiter"
-  }
-
-  const handleDelete = (type, id) => {
-    setDeleteConfirm({ show: true, type, id })
-  }
-
-  const handleEdit = (type, item) => {
-    // You can open a modal or navigate to edit page here
-    // This is just a placeholder function to be implemented by you
-    showNotification(`Edit ${type} feature not implemented yet`, "info")
-    console.log("Edit requested for:", type, item)
-  }
-
-  const showNotification = (message, type) => {
-    setNotification({ show: true, message, type })
-    setTimeout(() => setNotification({ show: false, message: "", type: "" }), 3000)
-  }
-
-  const confirmDelete = async () => {
-    const { type, id } = deleteConfirm
-    setLoading(true)
-    try {
-      let endpoint = ""
-      if (type === "offer") {
-        endpoint = `http://localhost:5050/offres/${id}`
-      } else if (type === "user") {
-        endpoint = `http://localhost:5050/users/${id}`
-      } else if (type === "admin") {
-        endpoint = `http://localhost:5050/admin/${id}`
+  useEffect(() => {
+    const start = async () => {
+      try {
+        gapi.load("client:auth2", async () => {
+          await gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES,
+          });
+          const authInstance = gapi.auth2.getAuthInstance();
+          setSignedIn(authInstance.isSignedIn.get());
+          authInstance.isSignedIn.listen(setSignedIn);
+        });
+      } catch (error) {
+        console.error("Erreur d'initialisation GAPI :", error);
       }
-      // Your API call to DELETE here, e.g.:
-      // const response = await fetch(endpoint, { method: "DELETE" })
+    };
+    start();
+  }, []);
 
-      // Simulate success (remove from state)
-      if (type === "offer") {
-        setOffers(prev => prev.filter(offer => offer._id !== id))
-        showNotification("Job offer deleted successfully", "success")
-      } else if (type === "user") {
-        setUsers(prev => prev.filter(user => user._id !== id))
-        showNotification("User deleted successfully", "success")
-      } else if (type === "admin") {
-        setAdminInfo(null) // or refetch admin info
-        showNotification("Admin deleted successfully", "success")
-      }
+  const signIn = async () => {
+    try {
+      await gapi.auth2.getAuthInstance().signIn();
+      setSignedIn(true);
     } catch (error) {
-      console.error(`Error deleting ${type}:`, error)
-      showNotification(`Failed to delete ${type}: ${error.message}`, "error")
-    } finally {
-      setLoading(false)
-      setDeleteConfirm({ show: false, type: "", id: "" })
+      console.error("Erreur lors de la connexion :", error);
     }
-  }
+  };
 
-  const cancelDelete = () => setDeleteConfirm({ show: false, type: "", id: "" })
+  const signOut = async () => {
+    try {
+      await gapi.auth2.getAuthInstance().signOut();
+      setSignedIn(false);
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion :", error);
+    }
+  };
 
-  const isRecruiter = (user) => user.role === "recruteur" || user.hasOwnProperty("entreprise")
+  const scheduleInterview = async () => {
+    if (!emailCandidat.trim() || !dateEntretien || !duree || !lieu.trim()) {
+      alert("Veuillez remplir tous les champs.");
+      return;
+    }
 
-  const filteredUsers = () => {
-    if (activeTab === "recruiters") return users.filter(user => isRecruiter(user))
-    if (activeTab === "candidates") return users.filter(user => !isRecruiter(user))
-    return users
-  }
+    const startDateTime = new Date(dateEntretien);
+    const endDateTime = new Date(startDateTime.getTime() + duree * 60000);
+
+    const event = {
+      summary: "Entretien d'embauche",
+      location: lieu,
+      description: "Entretien d'embauche avec le recruteur",
+      start: {
+        dateTime: startDateTime.toISOString(),
+        timeZone: "Europe/Paris",
+      },
+      end: {
+        dateTime: endDateTime.toISOString(),
+        timeZone: "Europe/Paris",
+      },
+      attendees: [{ email: emailCandidat }],
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: "email", minutes: 24 * 60 },
+          { method: "popup", minutes: 10 },
+        ],
+      },
+    };
+
+    try {
+      await gapi.client.calendar.events.insert({
+        calendarId: "primary",
+        resource: event,
+      });
+      alert("Entretien planifié et invitation envoyée !");
+      // reset des champs
+      setEmailCandidat("");
+      setDateEntretien("");
+      setDuree(30);
+      setLieu("Google Meet");
+    } catch (error) {
+      console.error("Erreur lors de la planification :", error);
+    }
+  };
 
   return (
-    <div className="admin-container">
-      {/* Admin Header */}
-      <div className="admin-header">
-        <div className="admin-avatar">
-          <FaUserCircle size={80} className="admin-icon" />
-        </div>
-        <div className="admin-title">
-          <h2>Admin Dashboard</h2>
-          <p className="admin-subtitle">Manage users, job offers, and admin</p>
-        </div>
-      </div>
+    <div className="container">
+      <h2>Candidatures Confirmées</h2>
+      <table className="table table-striped table-hover text-center">
+        <thead className="table-dark">
+          <tr>
+            <th>Offre</th>
+            <th>CV</th>
+            <th>Lettre de Motivation</th>
+            <th>Statut</th>
+            <th>Date de Postulation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {candidatures.length > 0 ? (
+            candidatures.map(({ _id, id_offre, cv, lettre_motivation, statut, date_postulation }) => (
+              <tr key={_id}>
+                <td>{id_offre?.titre || "N/A"}</td>
+                <td>
+                  <a href={`https://pfe-api-8b8e.vercel.app/${cv}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
+                    <i className="bi bi-file-earmark-text"></i> Voir CV
+                  </a>
+                </td>
+                <td>
+                  <a href={`https://pfe-api-8b8e.vercel.app/${lettre_motivation}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary btn-sm">
+                    <i className="bi bi-file-earmark-richtext"></i> Voir Lettre
+                  </a>
+                </td>
+                <td className={statut === "Accepté" ? "text-success fw-bold" : statut === "Rejeté" ? "text-danger fw-bold" : "text-warning fw-bold"}>
+                  {statut}
+                </td>
+                <td>{new Date(date_postulation).toLocaleDateString()}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5" className="text-muted">Aucune candidature confirmée trouvée.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
 
-      {/* Navigation Tabs */}
-      <div className="admin-tabs">
-        <button className={`admin-tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>
-          <FaUsers className="tab-icon" size={20} />
-          <span>All Users</span>
-        </button>
-        <button className={`admin-tab ${activeTab === "recruiters" ? "active" : ""}`} onClick={() => setActiveTab("recruiters")}>
-          <FaUserTie className="tab-icon" size={20} />
-          <span>Recruiters</span>
-        </button>
-        <button className={`admin-tab ${activeTab === "candidates" ? "active" : ""}`} onClick={() => setActiveTab("candidates")}>
-          <FaUserGraduate className="tab-icon" size={20} />
-          <span>Candidates</span>
-        </button>
-        <button className={`admin-tab ${activeTab === "offers" ? "active" : ""}`} onClick={() => setActiveTab("offers")}>
-          <FaBriefcase className="tab-icon" size={20} />
-          <span>Job Offers</span>
-        </button>
-        <button className={`admin-tab ${activeTab === "info" ? "active" : ""}`} onClick={() => setActiveTab("info")}>
-          <FaInfoCircle className="tab-icon" size={20} />
-          <span>Admin Info</span>
-        </button>
-      </div>
-
-      {/* Content Area */}
-      <div className="admin-content">
-        {/* Admin Info Section */}
-        {activeTab === "info" && (
-          <div className="admin-info-section">
-            <h3>Admin Information</h3>
-            {dataLoading.admin ? (
-              <p>Loading admin information...</p>
-            ) : adminInfo ? (
-              <div className="admin-info-details">
-                <p><strong>Name:</strong> {adminInfo.nom}</p>
-                <p><strong>First Name:</strong> {adminInfo.prenom}</p>
-                <p><strong>Email:</strong> {adminInfo.email}</p>
-                <p><strong>Phone Number:</strong> {adminInfo.phone}</p>
-                {/* Edit and Delete buttons for admin */}
-                <div className="user-card-actions">
-                  <button
-                    className="action-button edit-button"
-                    title="Edit Admin"
-                    onClick={() => handleEdit("admin", adminInfo)}
-                  >
-                    <FaEdit size={18} />
-                  </button>
-                  <button
-                    className="action-button delete-button"
-                    title="Delete Admin"
-                    onClick={() => handleDelete("admin", adminInfo._id)}
-                  >
-                    <FaTrash size={18} />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <p>No admin information available.</p>
-            )}
+      {!signedIn ? (
+        <button className="btn-login" onClick={signIn}>Se connecter avec Google</button>
+      ) : (
+        <div>
+          <h2>Planifier un entretien</h2>
+          <div className="form-group d-flex flex-column gap-2">
+            <input
+              type="email"
+              placeholder="Email du candidat"
+              value={emailCandidat}
+              onChange={(e) => setEmailCandidat(e.target.value)}
+              className="input-field"
+            />
+            <input
+              type="datetime-local"
+              value={dateEntretien}
+              onChange={(e) => setDateEntretien(e.target.value)}
+              className="input-field"
+            />
+            <input
+              type="number"
+              min="5"
+              placeholder="Durée (minutes)"
+              value={duree}
+              onChange={(e) => setDuree(parseInt(e.target.value))}
+              className="input-field"
+            />
+            <input
+              type="text"
+              placeholder="Lieu (Google Meet, Bureau...)"
+              value={lieu}
+              onChange={(e) => setLieu(e.target.value)}
+              className="input-field"
+            />
+            <button className="btn-planifier" onClick={scheduleInterview}>Planifier</button>
           </div>
-        )}
-
-        {/* Users List */}
-        {(activeTab === "all" || activeTab === "recruiters" || activeTab === "candidates") && (
-          <>
-            <div className="section-header">
-              <h3>
-                {activeTab === "recruiters" ? "Recruiters" : activeTab === "candidates" ? "Candidates" : "All Users"}
-              </h3>
-              <span className="count-badge">{filteredUsers().length}</span>
-            </div>
-
-            {dataLoading.users ? (
-              <div className="loading-indicator">
-                <FaSpinner className="spin" size={24} />
-                <span>Loading users...</span>
-              </div>
-            ) : filteredUsers().length === 0 ? (
-              <p>No users found.</p>
-            ) : (
-              <div className="user-list">
-                {filteredUsers().map(user => (
-                  <div key={user._id} className="user-card">
-                    <FaUserCircle size={40} className="user-icon" />
-                    <div className="user-details">
-                      <h4>{user.nom} {user.prenom}</h4>
-                      <p>{user.email}</p>
-                      <p>Role: {isRecruiter(user) ? "Recruiter" : "Candidate"}</p>
-                      {isRecruiter(user) && user.entreprise && <p>Company: {user.entreprise}</p>}
-                    </div>
-                    <div className="user-card-actions">
-                      <button
-                        className="action-button edit-button"
-                        title="Edit User"
-                        onClick={() => handleEdit("user", user)}
-                      >
-                        <FaEdit size={18} />
-                      </button>
-                      <button
-                        className="action-button delete-button"
-                        title="Delete User"
-                        onClick={() => handleDelete("user", user._id)}
-                      >
-                        <FaTrash size={18} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-
-        {/* Offers List */}
-        {activeTab === "offers" && (
-          <>
-            <div className="section-header">
-              <h3>Job Offers</h3>
-              <span className="count-badge">{offers.length}</span>
-            </div>
-
-            {dataLoading.offers ? (
-              <div className="loading-indicator">
-                <FaSpinner className="spin" size={24} />
-                <span>Loading job offers...</span>
-              </div>
-            ) : offers.length === 0 ? (
-              <p>No job offers found.</p>
-            ) : (
-              <div className="offer-list">
-                {offers.map(offer => (
-                  <div key={offer._id} className="offer-card">
-                    <h4>{offer.titre}</h4>
-                    <p>{offer.description}</p>
-                    <p><strong>Recruiter:</strong> {getRecruiterName(offer.recruteur)}</p>
-                    <p><strong>Location:</strong> {offer.lieu}</p>
-                    <p><strong>Salary:</strong> {offer.salaire}</p>
-                    <div className="offer-card-actions">
-                      <button
-                        className="action-button edit-button"
-                        title="Edit Offer"
-                        onClick={() => handleEdit("offer", offer)}
-                      >
-                        <FaEdit size={18} />
-                      </button>
-                      <button
-                        className="action-button delete-button"
-                        title="Delete Offer"
-                        onClick={() => handleDelete("offer", offer._id)}
-                      >
-                        <FaTrash size={18} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      {/* Delete Confirmation Modal */}
-      {deleteConfirm.show && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h4>Confirm Delete</h4>
-            <p>Are you sure you want to delete this {deleteConfirm.type}?</p>
-            <div className="modal-buttons">
-              <button
-                className="btn btn-danger"
-                disabled={loading}
-                onClick={confirmDelete}
-              >
-                {loading ? "Deleting..." : "Yes, Delete"}
-              </button>
-              <button className="btn btn-secondary" disabled={loading} onClick={cancelDelete}>
-                Cancel
-              </button>
-            </div>
+          <div className="logout-container">
+            <button className="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold shadow-sm" onClick={signOut}>Se déconnecter</button>
           </div>
-        </div>
-      )}
-
-      {/* Notification Toast */}
-      {notification.show && (
-        <div className={`notification ${notification.type}`}>
-          {notification.message}
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default AdminSpace
+export default GoogleCalendar;

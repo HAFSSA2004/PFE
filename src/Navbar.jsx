@@ -56,21 +56,7 @@ const Navbar = () => {
                 <Link className="nav-link" to="/Admin-space">Espace Admin</Link>
               </li>
             )}
-            <li>
-                <li className='nav-item'>
-                  <button
-                      className="nav-link text-danger"
-                      style={{marginBottom:'22px'}}
-                      onClick={() => {
-                        localStorage.removeItem('user');
-                        localStorage.removeItem('token');
-                        window.location.href = '/';
-                      }}
-                    >
-                      Logout
-                    </button>
-                </li>
-            </li>
+          
           </ul>
 
           <div className="d-flex align-items-center">
@@ -95,7 +81,7 @@ const Navbar = () => {
                   />
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
-                  <li className="dropdown-item text-muted">Welcome, {user.email}</li>
+                  <li className="dropdown-item text-muted me-4">Welcome, {user.email}</li>
                   {user.role === 'candidat' && (
                     <li><Link className="dropdown-item" to="/candidat-space">Espace Candidat</Link></li>
                   )}
@@ -107,7 +93,17 @@ const Navbar = () => {
                   )}
                   <li><hr className="dropdown-divider" /></li>
                   <li>
-                  
+                  <button
+                      className="text-danger"
+                      style={{marginBottom:'22px',backgroundColor:'white'}}
+                      onClick={() => {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token');
+                        window.location.href = '/';
+                      }}
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>

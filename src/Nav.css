@@ -15,9 +15,10 @@
 
 .navbar {
   position: relative;
-  overflow: hidden;
   height: 70px;
+  overflow: visible;
 }
+
 
 .navbar-logo {
   height: 200px;

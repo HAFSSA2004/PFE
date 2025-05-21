@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import Nav from "./Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 //hh
 const Home = () => {
   const [villes, setVilles] = useState([]);
@@ -121,7 +121,7 @@ const Home = () => {
               <div className="recruiter-content">
                 <h3>Publiez votre offre d'emploi</h3>
                 <p>Accédez à notre base de talents qualifiés et trouvez le candidat idéal pour votre entreprise.</p>
-                <button className="publish-btn">Publier une offre</button>
+                <button className="publish-btn"><Link  to='/PostJob' style={{textDecoration:'none',color:'white'}}>Publier une offre</Link></button>
               </div>
             </div>
           )}

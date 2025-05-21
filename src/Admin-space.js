@@ -170,7 +170,7 @@ const fetchAdminInfo = async () => {
       <div className="admin-tabs">
         <button className={`admin-tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>
           <FaUsers className="tab-icon" size={20} />
-          <span>Tous les utilisateurs</span>
+          <span>Utilisateurs</span>
         </button>
         <button
           className={`admin-tab ${activeTab === "recruiters" ? "active" : ""}`}
