@@ -1,33 +1,14 @@
 import './contact.css';
 import { Link } from 'react-router-dom';
-
+import Navbar from './Navbar';
 export default function ContactPage() {
   return (
-    <div className="contact-page">
+  <div>
+    <Navbar/>
+      <div className="contact-page">
       {/* Back to Home Button */}
       <div className="fixed top-6 left-6 z-50">
-        <Link
-          to="/"
-          className="flex items-center gap-2  px-4 py-2 rounded-full contact-hero "
-          title="Back to Home"
-          style={{ textDecoration: 'none'}}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-5 w-5"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-          <span className="text-sm font-medium">Home</span>
-        </Link>
+       
       </div>
 
       {/* Hero Section */}
@@ -157,6 +138,7 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
 

@@ -1,31 +1,13 @@
 import './About.css'
+import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
+      <Navbar/>
+      <div className="flex flex-col min-h-screen">
       <div className="fixed top-4 left-4 z-50">
-        <Link
-          to="/"
-          className="flex items-center text-slate-600 hover:text-slate-800 transition"
-          title="Back to Home"
-          style={{textDecoration:'none'}}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-7 w-7 mr-1"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-          <span className="text-base font-medium">Home</span>
-        </Link>
+       
       </div>
       {/* Hero Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-slate-50 to-slate-100">
@@ -409,6 +391,7 @@ export default function About() {
       {/* CTA Section */}
      
         
+    </div>
     </div>
   )
 }
