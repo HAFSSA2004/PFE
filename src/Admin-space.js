@@ -1,5 +1,5 @@
 "use client"
-
+import Navbar from './Navbar';
 import { useEffect, useState } from "react"
 import {
   FaUserCircle,
@@ -153,7 +153,9 @@ const fetchAdminInfo = async () => {
   }
 
   return (
-    <div className="admin-container">
+    <div>
+      <Navbar/>
+       <div className="admin-container">
       {/* Admin Header */}
       <div className="admin-header">
         <div className="admin-avatar">
@@ -400,6 +402,8 @@ const fetchAdminInfo = async () => {
 
       {/* Notification */}
       {notification.show && <div className={`notification ${notification.type}`}>{notification.message}</div>}
+    </div>
+  
     </div>
   )
 }
