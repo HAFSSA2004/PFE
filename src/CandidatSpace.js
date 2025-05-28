@@ -12,7 +12,7 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa"
 import "./CandidatSpace.css"
-
+//impob
 function CandidatSpace() {
   const [candidat, setCandidat] = useState(null)
   const [applications, setApplications] = useState([])
