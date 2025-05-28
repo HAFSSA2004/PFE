@@ -27,7 +27,7 @@ function CandidatSpace() {
           throw new Error("Token d'authentification manquant")
         }
 
-        const response = await fetch("http://localhost:5050/me", {
+        const response = await fetch("https://pfe-api-8b8e.vercel.app/me", {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function CandidatSpace() {
         if (!token) {
           throw new Error("Token d'authentification manquant")
         }
-        const response = await fetch("http://localhost:5050/mes-candidatures", {
+        const response = await fetch("https://pfe-api-8b8e.vercel.app/mes-candidatures", {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function CandidatSpace() {
         <div className="error-details">
           <p>Causes possibles:</p>
           <ul>
-            <li>Le serveur n'est pas accessible (http://localhost:5050)</li>
+            <li>Le serveur n'est pas accessible (https://pfe-api-8b8e.vercel.app)</li>
             <li>Votre session a expiré</li>
             <li>Problème de connexion réseau</li>
           </ul>
