@@ -12,7 +12,7 @@ function OffreDetail() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-
+//hhhh
   // Références pour les inputs de fichiers
   const cvInputRef = useRef(null);
   const lettreInputRef = useRef(null);
