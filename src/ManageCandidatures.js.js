@@ -67,40 +67,16 @@ function ManageCandidatures() {
         responseType: "blob",
       })
 
-      // Get the content type from response headers
-      const contentType = response.headers["content-type"] || response.data.type
-
       // Create blob URL and open in new tab
-      const blob = new Blob([response.data], { type: contentType })
+      const blob = new Blob([response.data], { type: response.data.type })
       const blobUrl = window.URL.createObjectURL(blob)
-
-      // For CV files, try to open directly first
-      if (fileType === "cv") {
-        const newWindow = window.open()
-        if (newWindow) {
-          newWindow.location.href = blobUrl
-        } else {
-          // Fallback if popup blocked
-          window.location.href = blobUrl
-        }
-      } else {
-        // For letters, open in new tab as before
-        window.open(blobUrl, "_blank")
-      }
+      window.open(blobUrl, "_blank")
 
       // Clean up after a delay
-      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 5000)
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000)
     } catch (error) {
       console.error(`❌ Erreur lors de l'ouverture du ${fileType}:`, error)
-
-      // More specific error handling
-      if (error.response?.status === 404) {
-        alert(`${fileType} non trouvé`)
-      } else if (error.response?.status === 401) {
-        alert("Session expirée. Veuillez vous reconnecter.")
-      } else {
-        alert(`Erreur lors de l'ouverture du ${fileType}`)
-      }
+      alert(`Erreur lors de l'ouverture du ${fileType}`)
     }
   }
 
@@ -114,8 +90,11 @@ function ManageCandidatures() {
 
             <h3>{candidature.id_offre?.titre || "Offre non disponible"}</h3>
 
+            
             <div className="card-links">
-              <a href="#" onClick={(e) => viewFile(candidature._id, "cv", e)} target="_blank" rel="noopener noreferrer">
+              <a href="#" onClick={(e) => viewFile(candidature._id, "cv", e)}
+               target="_blank"
+               rel="noopener noreferrer">
                 Voir CV
               </a>
               <a
