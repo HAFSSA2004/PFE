@@ -14,17 +14,18 @@ export default function ContactPage() {
       {/* Hero Section */}
       <div className="contact-hero">
         <div className="contact-hero-content">
-          <h1>Contact Us</h1>
-          <p className='text-white'>We're here to help with your recruitment and job search needs</p>
+          <h1>Contactez-nous</h1>
+          <p className='text-white'>Nous sommes là pour vous aider dans vos besoins de recrutement et de recherche d’emploi</p>
         </div>
       </div>
 
       <div className="contact-container">
         <div className="contact-info-container">
           <div className="contact-info">
-            <h2>Get in Touch</h2>
+            <h2>Entrer en contact</h2>
             <p>
-              Have questions about our services or need assistance? Our team is ready to help you find the right recruitment solution for your business or career.
+             
+              Vous avez des questions sur nos services ou besoin d’assistance ? Notre équipe est prête à vous aider à trouver la solution de recrutement idéale pour votre entreprise ou votre carrière.
             </p>
 
             <div className="contact-methods">
@@ -86,15 +87,12 @@ export default function ContactPage() {
             </div>
 
             <div className="social-connect">
-              <h3>Connect With Us</h3>
-              <div className="social-icons">
-                <SocialIcon platform="Facebook" link="#" />
-              </div>
+             
             </div>
           </div>
 
           <div className="office-locations">
-            <h2>Our Offices</h2>
+            <h2>Nos bureaux</h2>
             <div className="office-grid">
               <OfficeCard location="Paris (HQ)" address="123 Avenue des Champs-Élysées, 75008 Paris, France" phone="+33 (0)1 23 45 67 89" />
               <OfficeCard location="Lyon" address="45 Rue de la République, 69002 Lyon, France" phone="+33 (0)4 56 78 90 12" />
@@ -106,8 +104,8 @@ export default function ContactPage() {
 
         <div className="contact-form-container">
           <div className="contact-form">
-            <h2>Send Us a Message</h2>
-            <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+            <h2>Envoyez-nous un message</h2>
+            <p>Remplissez le formulaire ci-dessous et nous vous répondrons dès que possible.</p>
 
             <form onSubmit={(e) => e.preventDefault()}>
               <FormInput label="Name" name="name" type="text" required />
@@ -121,18 +119,18 @@ export default function ContactPage() {
               <div className="form-group checkbox-group">
                 <input type="checkbox" id="privacy" name="privacy" required />
                 <label htmlFor="privacy">
-                  I agree to the <a href="/privacy-policy">privacy policy</a> and consent to having my data processed
+                  J’accepte la <a href="/privacy-policy">politique de confidentialité</a> et consens au traitement de mes données
                 </label>
               </div>
-              <button type="submit" className="submit-button">Send Message</button>
+              <button type="submit" className="submit-button">Envoyer le message</button>
             </form>
           </div>
 
           <div className="contact-faq">
-            <h2>Frequently Asked Questions</h2>
+            <h2>Questions fréquentes</h2>
             <div className="faq-list">
-              <FAQItem question="What services does RecrutPro offer?" answer="We offer comprehensive recruitment solutions including job posting, candidate sourcing, executive search, and HR consulting services for businesses of all sizes." />
-              <FAQItem question="How quickly will I receive a response?" answer="We aim to respond to all inquiries within 24 business hours. For urgent matters, please call our customer service line." />
+              <FAQItem question="Quels services propose HireBridge? " answer="Nous proposons des solutions de recrutement complètes : publication d'offres, recherche de candidats, chasse de tête et conseil RH pour les entreprises de toutes tailles." />
+              <FAQItem question="Sous quel délai vais-je recevoir une réponse ?" answer="Nous nous engageons à répondre à toutes les demandes sous 24 heures ouvrées. Pour toute urgence, veuillez contacter notre service client par téléphone." />
             </div>
           </div>
         </div>

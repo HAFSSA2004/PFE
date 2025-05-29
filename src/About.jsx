@@ -15,18 +15,17 @@ export default function About() {
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="space-y-4">
               <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">
-                About JobConnect
+              À propos de JobConnect
               </div>
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Connecting Talent With Opportunity
+              Connecter les talents aux opportunités
               </h1>
               <p className="text-slate-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                We're on a mission to transform the recruitment landscape by creating meaningful connections between
-                employers and job seekers.
+                Notre mission est de transformer le paysage du recrutement en créant des liens significatifs entre les employeurs et les demandeurs d'emploi.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                  Join Our Network
+                 Rejoignez notre réseau
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -44,7 +43,7 @@ export default function About() {
                   </svg>
                 </button>
                 <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                  For Employers
+                  Pour les employeurs
                 </button>
               </div>
             </div>
@@ -66,11 +65,10 @@ export default function About() {
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">Our Story</div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Building Careers Since 2015</h2>
+              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">Notre histoire</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Bâtir des carrières depuis 2015</h2>
               <p className="max-w-[900px] text-slate-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                JobConnect was founded with a simple yet powerful vision: to create a platform where talent meets
-                opportunity in a seamless, efficient, and human-centered way.
+               JobConnect a été fondé avec une vision simple mais puissante : créer une plateforme où les talents rencontrent les opportunités de manière transparente, efficace et centrée sur l'humain.
               </p>
             </div>
           </div>
@@ -86,28 +84,25 @@ export default function About() {
               <ul className="grid gap-6">
                 <li>
                   <div className="grid gap-1">
-                    <h3 className="text-xl font-bold">Our Beginning</h3>
+                    <h3 className="text-xl font-bold">Nos débuts</h3>
                     <p className="text-slate-600">
-                      Started by a team of HR professionals who saw the need for a more efficient recruitment process,
-                      JobConnect has grown from a small startup to an industry leader.
+                     Créée par une équipe de professionnels des RH qui ont compris la nécessité d'un processus de recrutement plus efficace, JobConnect est passée d'une petite start-up à un leader du secteur.
                     </p>
                   </div>
                 </li>
                 <li>
                   <div className="grid gap-1">
-                    <h3 className="text-xl font-bold">Our Growth</h3>
+                    <h3 className="text-xl font-bold">Notre croissance</h3>
                     <p className="text-slate-600">
-                      Over the years, we've expanded our services across multiple industries and regions, helping
-                      thousands of professionals find their dream jobs.
+                     Au fil des années, nous avons étendu nos services à de nombreux secteurs et régions, aidant ainsi des milliers de professionnels à trouver l'emploi de leurs rêves.
                     </p>
                   </div>
                 </li>
                 <li>
                   <div className="grid gap-1">
-                    <h3 className="text-xl font-bold">Our Future</h3>
+                    <h3 className="text-xl font-bold">Notre avenir</h3>
                     <p className="text-slate-600">
-                      We continue to innovate and improve our platform, leveraging the latest technologies to make job
-                      searching and recruitment more effective than ever.
+                   Nous continuons d’innover et d’améliorer notre plateforme, en tirant parti des dernières technologies pour rendre la recherche d’emploi et le recrutement plus efficaces que jamais.
                     </p>
                   </div>
                 </li>
@@ -122,9 +117,9 @@ export default function About() {
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Our Impact in Numbers</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Notre impact en chiffres</h2>
               <p className="max-w-[600px] text-slate-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                We're proud of the difference we've made in the professional lives of our users.
+               Nous sommes fiers de la différence que nous avons apportée dans la vie professionnelle de nos utilisateurs.
               </p>
             </div>
           </div>
@@ -147,7 +142,7 @@ export default function About() {
                   <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                 </svg>
                 <div className="text-3xl font-bold">10K+</div>
-                <p className="text-sm text-slate-600 text-center">Jobs Posted Monthly</p>
+                <p className="text-sm text-slate-600 text-center">Offres d'emploi publiées mensuellement</p>
               </div>
             </div>
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm bg-white">
@@ -173,7 +168,7 @@ export default function About() {
                   <path d="M5 9a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2Z"></path>
                 </svg>
                 <div className="text-3xl font-bold">5K+</div>
-                <p className="text-sm text-slate-600 text-center">Partner Companies</p>
+                <p className="text-sm text-slate-600 text-center">Entreprises partenaires</p>
               </div>
             </div>
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm bg-white">
@@ -196,7 +191,7 @@ export default function About() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
                 <div className="text-3xl font-bold">1M+</div>
-                <p className="text-sm text-slate-600 text-center">Registered Professionals</p>
+                <p className="text-sm text-slate-600 text-center">Professionnels agréés</p>
               </div>
             </div>
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm bg-white">
@@ -217,7 +212,7 @@ export default function About() {
                   <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
                 <div className="text-3xl font-bold">85%</div>
-                <p className="text-sm text-slate-600 text-center">Successful Placements</p>
+                <p className="text-sm text-slate-600 text-center">Placements réussis</p>
               </div>
             </div>
           </div>
@@ -229,11 +224,10 @@ export default function About() {
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">Our Team</div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Meet the Experts Behind JobConnect</h2>
+              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">Notre équipe</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Rencontrez les experts derrière JobConnect</h2>
               <p className="max-w-[600px] text-slate-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Our diverse team brings together expertise from HR, technology, and business to create the best
-                recruitment platform.
+                Notre équipe diversifiée rassemble l'expertise des RH, de la technologie et des affaires pour créer la meilleure plateforme de recrutement.
               </p>
             </div>
           </div>
@@ -283,10 +277,10 @@ export default function About() {
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="space-y-4">
-              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">Our Services</div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Comprehensive Recruitment Solutions</h2>
+              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm text-slate-600">Nos services</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Solutions de recrutement complètes</h2>
               <p className="text-slate-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                We offer a range of services designed to meet the needs of both job seekers and employers.
+               Nous offrons une gamme de services conçus pour répondre aux besoins des demandeurs d’emploi et des employeurs.
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
@@ -307,9 +301,9 @@ export default function About() {
                     <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
                     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                   </svg>
-                  <h3 className="text-xl font-bold">Job Matching</h3>
+                  <h3 className="text-xl font-bold">Correspondance d'emploi</h3>
                   <p className="text-slate-600 mt-2">
-                    Our AI-powered algorithm connects candidates with the perfect job opportunities.
+                 Notre algorithme basé sur l'IA connecte les candidats aux opportunités d'emploi idéales.
                   </p>
                 </div>
               </div>
@@ -332,9 +326,9 @@ export default function About() {
                     <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                   </svg>
-                  <h3 className="text-xl font-bold">Talent Acquisition</h3>
+                  <h3 className="text-xl font-bold">Acquisition de talents</h3>
                   <p className="text-slate-600 mt-2">
-                    We help companies find and recruit top talent for their specific needs.
+                   Nous aidons les entreprises à trouver et à recruter les meilleurs talents pour leurs besoins spécifiques.
                   </p>
                 </div>
               </div>
@@ -355,9 +349,9 @@ export default function About() {
                     <circle cx="12" cy="8" r="6"></circle>
                     <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
                   </svg>
-                  <h3 className="text-xl font-bold">Career Coaching</h3>
+                  <h3 className="text-xl font-bold">Coaching de carrière</h3>
                   <p className="text-slate-600 mt-2">
-                    Professional guidance to help job seekers advance their careers.
+                    Orientation professionnelle pour aider les demandeurs d’emploi à faire progresser leur carrière.
                   </p>
                 </div>
               </div>
@@ -379,8 +373,8 @@ export default function About() {
                     <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                     <path d="M2 12h20"></path>
                   </svg>
-                  <h3 className="text-xl font-bold">Global Network</h3>
-                  <p className="text-slate-600 mt-2">Access to international job opportunities and talent pools.</p>
+                  <h3 className="text-xl font-bold">Réseau mondial</h3>
+                  <p className="text-slate-600 mt-2">Accès à des opportunités d’emploi et à des viviers de talents internationaux.</p>
                 </div>
               </div>
             </div>
