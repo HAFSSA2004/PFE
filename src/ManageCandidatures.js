@@ -21,7 +21,7 @@ function ManageCandidatures() {
   useEffect(() => {
     if (recruteurId) {
       axios
-        .get(`http://localhost:5050/candidatures/${recruteurId}`)
+        .get(`https://pfe-api-8b8e.vercel.app/candidatures/${recruteurId}`)
         .then((response) => {
           setCandidatures(response.data)
         })
@@ -31,7 +31,7 @@ function ManageCandidatures() {
 
   const updateStatut = (id, newStatut) => {
     axios
-      .put(`http://localhost:5050/candidatures/${id}/statut`, { statut: newStatut })
+      .put(`https://pfe-api-8b8e.vercel.app/candidatures/${id}/statut`, { statut: newStatut })
       .then(() => {
         setCandidatures((prev) => prev.map((c) => (c._id === id ? { ...c, statut: newStatut } : c)))
       })
@@ -58,7 +58,7 @@ function ManageCandidatures() {
         return
       }
 
-      const url = `http://localhost:5050/candidature/${candidatureId}/${fileType}`
+      const url = `https://pfe-api-8b8e.vercel.app/candidature/${candidatureId}/${fileType}`
 
       const response = await axios.get(url, {
         headers: {
