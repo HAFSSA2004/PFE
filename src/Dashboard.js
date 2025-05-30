@@ -29,7 +29,7 @@ function Dashboard() {
     useEffect(() => {
         if (recruteurId) {
             console.log("📡 Envoi de la requête API avec ID:", recruteurId);
-            fetch(`http://localhost:5050/candidatures/statistiques/${recruteurId}`)
+            fetch(`https://pfe-api-8b8e.vercel.app/candidatures/statistiques/${recruteurId}`)
                 .then(response => {
                     if (!response.ok) throw new Error("Erreur de récupération des statistiques");
                     return response.json();
