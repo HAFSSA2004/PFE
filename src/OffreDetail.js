@@ -18,7 +18,7 @@ function OffreDetail() {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(`http://localhost:5050/offre/${id}`)
+      .get(`https://pfe-api-8b8e.vercel.app/offre/${id}`)
       .then((response) => {
         setOffre(response.data)
         setError(null)
@@ -69,7 +69,7 @@ function OffreDetail() {
         return
       }
 
-      const response = await axios.post("http://localhost:5050/candidature", formData, {
+      const response = await axios.post("https://pfe-api-8b8e.vercel.app/candidature", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
