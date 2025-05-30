@@ -62,8 +62,8 @@ const Navbar = () => {
           <div className="d-flex align-items-center">
             {!user ? (
               <>
-                <Link to="/Login" className="btnL me-2">Sign In</Link>
-                <Link to="/Signup" className="btn btn-outline-primary me-3">Register</Link>
+                <Link to="/Login" className="btnL me-2">Se connecter</Link>
+                <Link to="/Signup" className="btn btn-outline-primary me-3">S'inscrire</Link>
               </>
             ) : (
               <div className="dropdown">
