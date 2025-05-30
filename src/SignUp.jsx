@@ -44,8 +44,8 @@ function Signup() {
      <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "550px" }}>
         <div className="col-md-6 d-flex flex-column justify-content-center h-100">
-          <h2 className="mb-4 fw-bold mt-5" style={{ color: "#00327D", fontFamily: "Inter" }}>
-            Sign up now and unlock new job opportunities!
+          <h2 className="mb-4 fw-bold mt-5" style={{ color: "#00327D", fontFamily: "Inter" ,fontSize:'18px'}}>
+        Inscrivez-vous dès maintenant et débloquez de nouvelles opportunités d'emploi !
           </h2>
           <form onSubmit={handleSignup}>
             <div className="mb-3">

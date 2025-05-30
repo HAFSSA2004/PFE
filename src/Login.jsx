@@ -53,8 +53,8 @@ function Login() {
         <div className="row w-100 shadow-lg rounded p-4 bg-white" style={{ maxWidth: "900px", height: "500px" }}>
           {/* Left side - Form */}
           <div className="col-md-6 d-flex flex-column justify-content-center h-100">
-            <h2 className="mb-4 fw-bold" style={{ color: "#00327D", fontFamily: "Inter" }}>
-              Sign up now and unlock new job opportunities!
+            <h2 className="mb-4 fw-bold" style={{ color: "#00327D", fontFamily: "Inter",fontSize:'20px' }}>
+             Accédez  à votre  compte et explorez de nouvelles opportunités
             </h2>
             <form onSubmit={handleLogin}>
               {/* Email Input */}
