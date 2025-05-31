@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Briefcase, Calendar } from "lucide-react"
 import "./MonOffre.css"
-
+//haf
 export default function MonOffre() {
   const { id } = useParams()
   const [offres, setOffres] = useState([])
