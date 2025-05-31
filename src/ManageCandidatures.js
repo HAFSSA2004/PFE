@@ -131,9 +131,10 @@ function ManageCandidatures() {
         ) : candidatures.length > 0 ? (
           candidatures.map((candidature) => (
             <div className="card-candidature" key={candidature._id}>
-              <div className={getBadgeClass(candidature.statut)}>
-                            {candidature.statut}
-                        </div>
+             <div key={candidature._id + candidature.statut} className={getBadgeClass(candidature.statut)}>
+  {candidature.statut}
+</div>
+
               <h3>{candidature.id_offre?.titre || "Offre non disponible"}</h3>
 
               <div className="card-links">
