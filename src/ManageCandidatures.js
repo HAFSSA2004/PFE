@@ -34,14 +34,15 @@ function ManageCandidatures() {
     }
   }, [recruteurId])
 
-  const updateStatut = (id, newStatut) => {
-    axios
-      .put(`https://pfe-api-8b8e.vercel.app/candidatures/${id}/statut`, { statut: newStatut })
-      .then(() => {
-        setCandidatures((prev) => prev.map((c) => (c._id === id ? { ...c, statut: newStatut } : c)))
-      })
-      .catch((error) => console.error("❌ Erreur lors de la mise à jour du statut :", error))
-  }
+   const updateStatut = (id, newStatut) => {
+        axios.put(`https://pfe-api-8b8e.vercel.app/candidatures/${id}/statut`, { statut: newStatut })
+            .then(() => {
+                setCandidatures(prev =>
+                    prev.map(c => c._id === id ? { ...c, statut: newStatut } : c)
+                );
+            })
+            .catch(error => console.error("❌ Erreur lors de la mise à jour du statut :", error));
+    };
 
   const getBadgeClass = (statut) => {
     switch (statut) {
@@ -131,9 +132,7 @@ function ManageCandidatures() {
         ) : candidatures.length > 0 ? (
           candidatures.map((candidature) => (
             <div className="card-candidature" key={candidature._id}>
-             <div key={candidature._id + candidature.statut} className={getBadgeClass(candidature.statut)}>
-  {candidature.statut}
-</div>
+              <div className={getBadgeClass(candidature.statut)}>{candidature.statut}</div>
 
               <h3>{candidature.id_offre?.titre || "Offre non disponible"}</h3>
 
