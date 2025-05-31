@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import './all.css';
 const AllOffres = () => {
   const [offres, setOffres] = useState([]);
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const AllOffres = () => {
 
   return (
     <div className="jobs-grid">
+      <h1 class="page-title">Toutes les Offres d'Emploi</h1>
       {offres.map((offre) => (
         <div key={offre._id} className={`job-card ${offre.featured ? "featured" : ""}`}>
           {offre.featured && <div className="featured-badge">Offre mise en avant</div>}
