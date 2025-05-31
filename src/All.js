@@ -20,8 +20,10 @@ const AllOffres = () => {
   }, []);
 
   return (
+    <div>
+    <h1 class="page-title">Toutes les Offres d'Emploi</h1>
     <div className="jobs-grid">
-      <h1 class="page-title">Toutes les Offres d'Emploi</h1>
+      
       {offres.map((offre) => (
         <div key={offre._id} className={`job-card ${offre.featured ? "featured" : ""}`}>
           {offre.featured && <div className="featured-badge">Offre mise en avant</div>}
@@ -47,6 +49,7 @@ const AllOffres = () => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };
