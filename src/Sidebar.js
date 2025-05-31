@@ -32,7 +32,7 @@ function Sidebar() {
                     </Link>
                     <Link to="/manage-candidatures" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
-                        <span>Gérer les Candidatures</span>
+                        <span>Gérer Candidatures</span>
                     </Link>
                     <Link to="/PostJob" className="nav-item">
                         <FontAwesomeIcon icon={faFileAlt} />
