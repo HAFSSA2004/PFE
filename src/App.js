@@ -34,7 +34,7 @@ function App() {
         <Route path="/manage-candidatures" element={<ManageCandidatures />} />
         <Route path="/GoogleCalendar" element={<GoogleCalendar />} />
         <Route path="/PostJob" element={<PostJob />} />
-        <Route path="/offres/recruteur/:id" element={<MonOffre />} />
+        <Route path="/MonOffre" element={<MonOffre />} />
         <Route path="/candidat-space" element={<CandidatSpace />} />
         <Route path="/Admin-space" element={<AdminSpace />} />
 

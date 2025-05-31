@@ -1,32 +1,51 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Briefcase, Calendar } from "lucide-react";
-import "./MonOffre.css";
+"use client"
+
+import { useEffect, useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import { Briefcase, Calendar } from "lucide-react"
+import "./MonOffre.css"
 
 export default function MonOffre() {
-  const { id } = useParams();
-  const [offres, setOffres] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const [offres, setOffres] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    fetch(`https://pfe-api-8b8e.vercel.app/offres/recruteur/${id}`)
+    // Get user ID from URL params or localStorage
+    let userId = id
+
+    if (!userId) {
+      const userData = localStorage.getItem("user")
+      if (userData) {
+        const user = JSON.parse(userData)
+        userId = user._id || user.id
+      }
+    }
+
+    if (!userId) {
+      setError("ID utilisateur non trouvé")
+      setLoading(false)
+      return
+    }
+
+    fetch(`https://pfe-api-8b8e.vercel.app/offres/recruteur/${userId}`)
       .then((res) => {
-        if (!res.ok) throw new Error("Erreur de récupération des offres");
-        return res.json();
+        if (!res.ok) throw new Error("Erreur de récupération des offres")
+        return res.json()
       })
       .then((data) => setOffres(data))
       .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [id]);
+      .finally(() => setLoading(false))
+  }, [id])
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-10">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-1">👋 Bienvenue, Recruteur</h1>
-          <p className="text-gray-500">Voici la liste de vos offres d’emploi.</p>
+          <p className="text-gray-500">Voici la liste de vos offres d'emploi.</p>
         </header>
 
         {loading && (
@@ -44,7 +63,7 @@ export default function MonOffre() {
 
         {!loading && !error && offres.length === 0 && (
           <div className="text-center text-gray-600 mt-16">
-            <p className="text-lg">Aucune offre n’a été publiée pour l’instant.</p>
+            <p className="text-lg">Aucune offre n'a été publiée pour l'instant.</p>
           </div>
         )}
 
@@ -68,10 +87,7 @@ export default function MonOffre() {
                   <span>{new Date(offre.date_publication).toLocaleDateString()}</span>
                 </div>
 
-                <button
-                  onClick={() => navigate(`/offre/${offre._id}`)}
-                  className="voir-btn"
-                >
+                <button onClick={() => navigate(`/offre/${offre._id}`)} className="voir-btn">
                   Voir →
                 </button>
               </div>
@@ -80,5 +96,5 @@ export default function MonOffre() {
         </div>
       </div>
     </div>
-  );
+  )
 }

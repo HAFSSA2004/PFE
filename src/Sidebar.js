@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faFileAlt, faCalendar,faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faFileAlt, faCalendar,faSignOutAlt,faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { Link ,useNavigate} from "react-router-dom";
 
@@ -38,6 +38,14 @@ function Sidebar() {
                         <FontAwesomeIcon icon={faFileAlt} />
                         <span>Publier une Offre</span>
                     </Link>
+
+
+                    <Link to="/MonOffre" className="nav-item">
+                        <FontAwesomeIcon icon={faBriefcase} />
+                        <span>Mes offres</span>
+                    </Link>
+
+
                     <Link to="/GoogleCalendar" className="nav-item">
                         <FontAwesomeIcon icon={faCalendar} />
                         <span style={{fontSize:'15px'}}>Planning  Entretiens</span>
