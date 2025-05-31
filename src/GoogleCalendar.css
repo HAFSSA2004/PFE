@@ -10,6 +10,42 @@
     flex-direction: column;
     min-height: 80vh; /* Ensure the container takes the full height */
 }
+.back-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.back-button i {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #f0f0f0;
+  color: #222;
+  transform: scale(1.05);
+}
+
+.back-button:hover i {
+  transform: translateX(-2px);
+}
+
+
+
 
 /* Header */
 h2 {

@@ -42,6 +42,11 @@ export default function MonOffre() {
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-10">
+         <div className="mb-3">
+     <a href="/dashboard" className=" back-button">
+  <i className="bi bi-arrow-left"></i> 
+</a>
+</div>
       <div className="max-w-6xl mx-auto">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-1">👋 Bienvenue, Recruteur</h1>

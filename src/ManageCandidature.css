@@ -1,3 +1,169 @@
+
+
+
+/* Add these styles to your existing CSS file */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+}
+
+.loading-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.loading-header h3 {
+  margin-top: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.skeleton-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.skeleton-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeleton-badge {
+  width: 80px;
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-link {
+  width: 80px;
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.skeleton-select {
+  width: 120px;
+  height: 36px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-date {
+  width: 60%;
+  height: 16px;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  width: 100%;
+  min-height: 400px;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  background: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  color: #374151;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #6b7280;
+  font-size: 1rem;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skeleton-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .loading-container {
+    padding: 1rem;
+  }
+
+  .empty-state {
+    padding: 2rem 1rem;
+    min-height: 300px;
+  }
+}
+
 .manage-candidatures-container {
     display: flex;
     background-color: #f5f6fa;

@@ -1,4 +1,50 @@
 /* Professional Job Offers List Design */
+.skeleton-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-icon, .skeleton-title, .skeleton-text, .skeleton-footer {
+  background: #e5e7eb;
+  border-radius: 6px;
+}
+
+.skeleton-icon {
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
+
+.skeleton-title {
+  width: 50%;
+  height: 20px;
+  margin: 8px 0;
+}
+
+.skeleton-text {
+  height: 60px;
+  margin: 12px 0;
+}
+
+.skeleton-footer {
+  height: 20px;
+  width: 80px;
+  margin-top: 10px;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #f3f4f6;
+  }
+  50% {
+    background-color: #e5e7eb;
+  }
+  100% {
+    background-color: #f3f4f6;
+  }
+}
 
 /* Container styles */
 .min-h-screen {
@@ -6,7 +52,9 @@
   background-color: #f9fafb;
   padding: 2rem 1.5rem;
 }
-
+.back-button{
+  margin-top: 20px;
+}
 /* Header styles */
 header {
   margin-bottom: 2.5rem;
