@@ -30,7 +30,7 @@ export default function MonOffre() {
       return
     }
 
-    fetch(`https://pfe-api-8b8e.vercel.app/offres/recruteur/${userId}`)
+    fetch(`http://localhost:5050/offres/recruteur/${userId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Erreur de récupération des offres")
         return res.json()

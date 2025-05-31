@@ -30,7 +30,7 @@ const GoogleCalendar = () => {
   useEffect(() => {
     if (recruteurId) {
       axios
-        .get(`http://localhost:5050/candidatures/confirmees/${recruteurId}`)
+        .get(`https://pfe-api-8b8e.vercel.app/candidatures/confirmees/${recruteurId}`)
         .then((response) => {
           console.log("Candidatures confirmées:", response.data)
           setCandidatures(response.data)
