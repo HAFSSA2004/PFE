@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './all.css';
+import Navbar from "./Navbar";
 const AllOffres = () => {
   const [offres, setOffres] = useState([]);
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ const AllOffres = () => {
 
   return (
     <div>
-    <h1 class="page-title">Toutes les Offres d'Emploi</h1>
+     <Navbar/>
+       <h1 className="page-title mt-3 ">Toutes les Offres d'Emploi</h1>
     <div className="jobs-grid">
       
       {offres.map((offre) => (
